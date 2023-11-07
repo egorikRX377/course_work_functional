@@ -385,3 +385,69 @@ void Employee::printAllSaleContracts(const vector <shared_ptr<saleContract>>& co
 	}
 	return;
 }
+void Employee::findSaleContracts(const vector <shared_ptr<saleContract>>& contractBASE)
+{
+	system("cls");
+	while (1)
+	{
+		cout << "\t\t\t_________________________________________________________________________________________________\n\n\n";
+		cout << "\t\t\t________________________  НАЙТИ ИНФОРМАЦИЮ О ДОГОВОРАХ ПО ПАРАМЕТРУ_________________________\n\n";
+		cout << "1. Найти договора по имени заказчика" << endl;
+		cout << "2. Найти договора по адресу заказчика" << endl;
+		cout << "3. Найти договора по способу оплаты" << endl;
+		cout << "4. Выйти из меню поиска" << endl;
+		int choice;
+		cin >> choice;
+		switch (choice)
+		{
+		case 1:
+		{
+			string name;
+			cout << "Введите имя заказчика: ";
+			cin >> name;
+			auto iter = find_if(contractBASE.begin(), contractBASE.end(), [&name](const shared_ptr<saleContract>& a) { return a->getCustomer().getName() == name; });
+			if (iter == contractBASE.end()) { cout << "Договора, с таким именем заказчика не найдено!" << endl; system("pause"); break; }
+			while(iter != contractBASE.end())
+			{
+				(*iter)->displayContractInfo();
+				iter = find_if(next(iter), contractBASE.end(), [&name](const shared_ptr<saleContract>& a) { return a->getCustomer().getName() == name; });
+			}
+			break;
+		}
+		case 2:
+		{
+			string address;
+			cout << "Введите адрес заказчика: ";
+			cin >> address;
+			auto iter = find_if(contractBASE.begin(), contractBASE.end(), [&address](const shared_ptr<saleContract>& a) { return a->getCustomer().getAddress() == address; });
+			if (iter == contractBASE.end()) { cout << "Договора, с таким адресом заказчика не было найдено!" << endl; system("pause"); break; }
+			while (iter != contractBASE.end())
+			{
+				(*iter)->displayContractInfo();
+				iter = find_if(next(iter), contractBASE.end(), [&address](const shared_ptr<saleContract>& a) { return a->getCustomer().getAddress() == address; });
+			}
+			break;
+		}
+		case 3:
+		{
+			string methodName;
+			cout << "Введите название способом оплаты: ";
+			cin >> methodName;
+			auto iter = find_if(contractBASE.begin(), contractBASE.end(), [&methodName](const shared_ptr<saleContract>& a) { return a->getMethod()->getMethodName() == methodName; });
+			if (iter == contractBASE.end()) { cout << "Договора, с таким способом оплаты не было найдено!" << endl; system("pause");  break; }
+			while (iter != contractBASE.end())
+			{
+				(*iter)->displayContractInfo();
+				iter = find_if(next(iter), contractBASE.end(), [&methodName](const shared_ptr<saleContract>& a) { return a->getMethod()->getMethodName() == methodName; });
+			}
+			break;
+		}
+		case 4:
+		{
+			return;
+		}
+		default:
+			cout << "Не верный выбор!" << endl;
+		}
+	}
+}

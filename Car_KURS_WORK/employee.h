@@ -32,4 +32,5 @@ public:
 
 
 	void printAllSaleContracts(const vector <shared_ptr<saleContract>>& contractBASE);
+	void findSaleContracts(const vector <shared_ptr<saleContract>>& contractBASE);
 };
