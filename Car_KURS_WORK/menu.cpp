@@ -66,7 +66,8 @@ void adminFunctionalMenu::displayMenu(Employee& employee) const
 		cout << "7. Фильтровать информацию об автомобилях (по параметрам)" << endl << endl;
 		cout << "8. Посмотреть информацию о договорах купли-продажи" << endl;
 		cout << "9. Найти договора по параметрам" << endl;
-		cout << "10. Выйти из функционального меню пользователя" << endl;
+		cout << "10. Отсортировать договора по параметрам" << endl;
+		cout << "11. Выйти из функционального меню пользователя" << endl;
 		int choice;
 		cin >> choice;
 		switch (choice)
@@ -117,6 +118,11 @@ void adminFunctionalMenu::displayMenu(Employee& employee) const
 			break;
 		}
 		case 10:
+		{
+			employee.sortSaleContracts(contractBASE);
+			break;
+		}
+		case 11:
 		{
 			return;
 		}

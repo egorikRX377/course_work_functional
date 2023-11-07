@@ -451,3 +451,43 @@ void Employee::findSaleContracts(const vector <shared_ptr<saleContract>>& contra
 		}
 	}
 }
+void Employee::sortSaleContracts(vector <shared_ptr<saleContract>>& contractBASE)
+{
+	system("cls");
+	while (1)
+	{
+		cout << "\t\t\t_________________________________________________________________________________________________\n\n\n";
+		cout << "\t\t\t________________________  ОТСОРТИРОВАТЬ ДОГОВОРА ПО ПАРАМЕТРУ_________________________\n\n";
+		cout << "1. Отсортировать договора ежемесячному платежу (в порядке возрастания)" << endl;
+		cout << "2. Отсортировать договора по конечной стоимости (в порядке убывания)" << endl;
+		cout << "3. Отсортировать машины по начальному/конечному взносу (в порядке возрастания)" << endl;
+		cout << "4. Выйти из меню сортировки" << endl;
+		int choice;
+		cin >> choice;
+		switch (choice)
+		{
+		case 1:
+		{
+			sort(contractBASE.begin(), contractBASE.end(), [](const shared_ptr<saleContract>& a, const shared_ptr<saleContract>& b) { return a->getMethod()->getMonthlyFee() < b->getMethod()->getMonthlyFee(); });
+			break;
+		}
+		case 2:
+		{
+			sort(contractBASE.begin(), contractBASE.end(), [](const shared_ptr<saleContract>& a, const shared_ptr<saleContract>& b) { return a->getMethod()->getResultCost() > b->getMethod()->getResultCost(); });
+			break;
+		}
+		case 3:
+		{
+			sort(contractBASE.begin(), contractBASE.end(), [](const shared_ptr<saleContract>& a, const shared_ptr<saleContract>& b) { return a->getMethod()->getFee() < b->getMethod()->getFee(); });
+			break;
+		}
+		case 4:
+		{
+			return;
+		}
+		default:
+			cout << "Не верный выбор!" << endl;
+		}
+		system("pause");
+	}
+}
