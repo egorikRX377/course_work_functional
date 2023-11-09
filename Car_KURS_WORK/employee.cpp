@@ -5,6 +5,7 @@
 using namespace std;
 
 
+void displayCarTableHeader();
 
 Employee::Employee() : account(nullptr) {}
 Employee::Employee(shared_ptr<AdminAccount> account)
@@ -39,6 +40,7 @@ void Employee::addCarInfo(vector <shared_ptr<Car>>& carBASE)
 	system("pause");
 	return;
 }
+
 void Employee::printAllCarInfo(const vector <shared_ptr<Car>>& carBASE, Table<Car>& table)
 {
 	table.displayTable(carBASE);
@@ -233,7 +235,12 @@ void Employee::findCarInfo(const vector <shared_ptr<Car>>& carBASE)
 			cin >> brand;
 			auto iter = find_if(carBASE.begin(), carBASE.end(), [&brand](const shared_ptr<Car>& a) { return a->getBrand() == brand; });
 			if (iter == carBASE.end()) { cout << "Автомобиля, с такой маркой не было найдено!" << endl; system("pause"); break; }
-			(*iter)->displayCarInfo();
+			displayCarTableHeader();
+			while (iter != carBASE.end())
+			{
+				(*iter)->displayCarInfo();
+				iter = find_if(next(iter), carBASE.end(), [&brand](const shared_ptr<Car>& a) { return a->getBrand() == brand; });
+			}
 			system("pause");
 			break;
 		}
@@ -244,6 +251,7 @@ void Employee::findCarInfo(const vector <shared_ptr<Car>>& carBASE)
 			cin >> regNumber;
 			auto iter = find_if(carBASE.begin(), carBASE.end(), [&regNumber](const shared_ptr<Car>& a) { return a->getRegistrationNumber() == regNumber; });
 			if (iter == carBASE.end()) { cout << "Автомобиля, с таким регистрационным номером не было найдено!" << endl; system("pause"); break; }
+			displayCarTableHeader();
 			(*iter)->displayCarInfo();
 			system("pause");
 			break;
@@ -255,7 +263,12 @@ void Employee::findCarInfo(const vector <shared_ptr<Car>>& carBASE)
 			cin >> price;
 			auto iter = find_if(carBASE.begin(), carBASE.end(), [&price](const shared_ptr<Car>& a) { return a->getPrice() == price; });
 			if (iter == carBASE.end()) { cout << "Автомобиля, с такой ценой не было найдено!" << endl; system("pause");  break; }
-			(*iter)->displayCarInfo();
+			displayCarTableHeader();
+			while (iter != carBASE.end())
+			{
+				(*iter)->displayCarInfo();
+				iter = find_if(next(iter), carBASE.end(), [&price](const shared_ptr<Car>& a) { return a->getPrice() == price; });
+			}
 			system("pause");
 			break;
 		}
@@ -349,6 +362,7 @@ void Employee::filtrateCarInfo(const vector <shared_ptr<Car>>& carBASE)
 		}
 	}
 
+	displayCarTableHeader();
 	for (const auto& car : carBASE)
 	{
 		for (const auto& carBrand : brands)
@@ -488,4 +502,13 @@ void Employee::sortSaleContracts(vector <shared_ptr<saleContract>>& contractBASE
 		}
 		system("pause");
 	}
+}
+
+
+
+void displayCarTableHeader()
+{
+	cout << setw(5) << right << setfill('=') << "" << setw(20) << left << setfill('=') << "" << setw(25) << left << setfill('=') << "" << setw(10) << left << "" << setw(10) << left << "" << setw(27) << left << "" << endl;
+	cout << '|' << setw(5) << left << setfill(' ') << "ID" << '|' << setw(20) << left << setfill(' ') << "Марка" << '|' << setw(25) << left << "Регистрационный номер" << '|' << setw(10) << left << "Пробег" << '|' << setw(10) << left << "Цена" << '|' << setw(20) << left << "Состояние" << '|' << endl;
+	cout << '|' << setw(5) << right << setfill('=') << "" << setw(20) << left << setfill('=') << "" << setw(25) << left << setfill('=') << "" << setw(10) << left << "" << setw(10) << left << "" << setw(25) << left << "" << '|' << endl;
 }

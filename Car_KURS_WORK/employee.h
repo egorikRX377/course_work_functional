@@ -5,6 +5,7 @@
 #include <memory>
 #include <fstream>
 #include <vector>
+#include <iomanip>
 
 #include "reg_log_area.h"
 #include "car.h"

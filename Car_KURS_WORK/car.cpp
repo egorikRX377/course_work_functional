@@ -39,12 +39,8 @@ void Car::setCondition(string condition) { this->condition = condition; }
 
 void Car::displayCarInfo() const
 {
-	cout << "ID: " << carID << endl;
-	cout << "Марка: " << brand << endl;
-	cout << "Регистрационный номер: " << registrationNumber << endl;
-	cout << "Пробег: " << mileAge << endl;
-	cout << "Цена: " << price << endl;
-	cout << "Состояние: " << condition << endl;
+	cout << '|' << setw(5) << left << setfill(' ') << getID() << '|' << setw(20) << left << setfill(' ') << getBrand() << '|' << setw(25) << left << getRegistrationNumber() << '|' << setw(10) << left << getMileAge() << '|' << setw(10) << left << getPrice() << '|' << setw(20) << left << getCondition() << '|' << endl;
+	cout << '|' << setw(5) << right << setfill('=') << "" << setw(20) << left << setfill('=') << "" << setw(25) << left << setfill('=') << "" << setw(10) << left << "" << setw(10) << left << "" << setw(25) << left << "" << '|' << endl;
 }
 
 void Car::spcDisplayCarInfo() const

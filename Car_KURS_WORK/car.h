@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <vector>
 #include <sstream>
+#include <iomanip>
 
 #include "reg_log_area.h"
 #include "helper.h"
