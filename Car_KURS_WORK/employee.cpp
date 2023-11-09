@@ -1,6 +1,6 @@
 #include "employee.h"
 
-
+#include "tables.h"
 
 using namespace std;
 
@@ -39,14 +39,12 @@ void Employee::addCarInfo(vector <shared_ptr<Car>>& carBASE)
 	system("pause");
 	return;
 }
-void Employee::printAllCarInfo(const vector <shared_ptr<Car>>& carBASE)
+void Employee::printAllCarInfo(const vector <shared_ptr<Car>>& carBASE, Table<Car>& table)
 {
-	for (const auto& item : carBASE)
-	{
-		item->displayCarInfo();
-	}
+	table.displayTable(carBASE);
 	return;
 }
+
 void Employee::deleteCarInfo(vector <shared_ptr<Car>>& carBASE)
 {
 	system("cls");

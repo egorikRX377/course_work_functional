@@ -9,6 +9,7 @@
 #include "reg_log_area.h"
 #include "car.h"
 #include "paymentMethods.h"
+#include "tables.h"
 
 using namespace std;
 
@@ -46,7 +47,7 @@ public:
 
 	void inputDataAboutYourSelf();
 
-	void printAllCarInfo(const vector <shared_ptr<Car>>& carBASE);
+	void printAllCarInfo(const vector <shared_ptr<Car>>& carBASE, Table<Car>& table);
 	void sortCarInfo(vector <shared_ptr<Car>>& carBASE);
 	void findCarInfo(const vector <shared_ptr<Car>>& carBASE);
 	void filtrateCarInfo(const vector <shared_ptr<Car>>& carBASE);

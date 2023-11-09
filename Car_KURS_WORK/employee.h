@@ -9,6 +9,7 @@
 #include "reg_log_area.h"
 #include "car.h"
 #include "saleContract.h"
+#include "tables.h"
 
 using namespace std;
 
@@ -22,7 +23,7 @@ public:
 	Employee(shared_ptr<AdminAccount> account);
 
 	void addCarInfo(vector <shared_ptr<Car>>& carBASE);
-	void printAllCarInfo(const vector <shared_ptr<Car>>& carBASE);
+	void printAllCarInfo(const vector <shared_ptr<Car>>& carBASE, Table<Car>& table);
 	void deleteCarInfo(vector <shared_ptr<Car>>& carBASE);
 	void editCarInfo(vector <shared_ptr<Car>>& carBASE);
 

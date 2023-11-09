@@ -20,7 +20,8 @@ void userFunctionalMenu::displayMenu(Customer& customer) const
 		{
 		case 1:
 		{
-			customer.printAllCarInfo(carBASE);
+			CarTable table;
+			customer.printAllCarInfo(carBASE, table);
 			break;
 		}
 		case 2:
@@ -74,7 +75,8 @@ void adminFunctionalMenu::displayMenu(Employee& employee) const
 		{
 		case 1:
 		{
-			employee.printAllCarInfo(carBASE);
+			CarTable table;
+			employee.printAllCarInfo(carBASE, table);
 			break;
 		}
 		case 2:

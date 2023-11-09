@@ -8,6 +8,7 @@
 #include <sstream>
 
 #include "menu.h"
+#include "tables.h"
 
 using namespace std;
 
@@ -35,5 +36,8 @@ int main()
 	FileHandler<AdminAccount>::writeToFile(filePATHS::ADMIN_ACCOUNTS_PATH, adminAccounts);
 	FileHandler<UserAccount>::writeToFile(filePATHS::USER_ACCOUNTS_PATH, userAccounts);
 	FileHandler<saleContract>::writeToFile(filePATHS::contractsPATH, contractBASE);
+
+	/*CarTable table;
+	table.displayTable(carBASE);*/
 	return 0;
 }

@@ -1,6 +1,7 @@
 #include "customer.h"
 #include "paymentMethods.h"
 
+
 using namespace std;
 
 
@@ -42,12 +43,9 @@ void Customer::inputDataAboutYourSelf()
 
 
 
-void Customer::printAllCarInfo(const vector <shared_ptr<Car>>& carBASE)
+void Customer::printAllCarInfo(const vector <shared_ptr<Car>>& carBASE, Table<Car>& table)
 {
-	for (const auto& item : carBASE)
-	{
-		item->displayCarInfo();
-	}
+	table.displayTable(carBASE);
 	return;
 }
 void Customer::sortCarInfo(vector <shared_ptr<Car>>& carBASE)
