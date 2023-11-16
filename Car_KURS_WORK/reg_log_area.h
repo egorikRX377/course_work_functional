@@ -5,51 +5,53 @@
 #include <memory>
 #include <fstream>
 #include <vector>
+#include <conio.h>
 
 
 using namespace std;
 
+
 namespace filePATHS
 {
-	const std::string USER_ACCOUNTS_PATH = "userAccounts.txt";
-	const std::string ADMIN_ACCOUNTS_PATH = "adminAccounts.txt";
-	const std::string humanPATH = "humans.txt";
+	const string USER_ACCOUNTS_PATH = "userAccounts.txt";
+	const string ADMIN_ACCOUNTS_PATH = "adminAccounts.txt";
+	const string humanPATH = "humans.txt";
 }
 
-
+const string passwordExample = "1892paSSword";
 
 class Account
 {
 protected:
-	std::string login;
-	std::string password;
+	string login;
+	string password;
 public:
 	Account();
-	Account(std::string login, std::string password);
+	Account(string login, string password);
 
-	std::string getLogin();
-	std::string getPassword();
-	void setLogin(std::string login);
-	void setPassword(std::string password);
+	string getLogin();
+	string getPassword();
+	void setLogin(string login);
+	void setPassword(string password);
 };
 
 class UserAccount : public Account
 {
 public:
 	UserAccount();
-	UserAccount(std::string login, std::string password);
+	UserAccount(string login, string password);
 
-	friend std::ostream& operator<<(std::ostream& buf, const std::shared_ptr<UserAccount>& accountPtr);
-	friend std::istream& operator>>(std::istream& buf, std::shared_ptr<UserAccount>& accountPtr);
+	friend ostream& operator<<(ostream& buf, const shared_ptr<UserAccount>& accountPtr);
+	friend istream& operator>>(istream& buf, shared_ptr<UserAccount>& accountPtr);
 };
 class AdminAccount : public Account
 {
 public:
 	AdminAccount();
-	AdminAccount(std::string login, std::string password);
+	AdminAccount(string login, string password);
 
-	friend std::ostream& operator<<(std::ostream& buf, const std::shared_ptr<AdminAccount>& accountPtr);
-	friend std::istream& operator>>(std::istream& buf, std::shared_ptr<AdminAccount>& accountPtr);
+	friend ostream& operator<<(ostream& buf, const shared_ptr<AdminAccount>& accountPtr);
+	friend istream& operator>>(istream& buf, shared_ptr<AdminAccount>& accountPtr);
 };
 
 
@@ -58,71 +60,227 @@ template<class T>
 class IRegistrable
 {
 public:
-	virtual std::shared_ptr<T> registrate() = 0;
+	virtual void registrate(vector<shared_ptr<T>>& accountsBASE) = 0;
 };
 template<class T>
 class RegistrateSystem : public IRegistrable<T>
 {
 public:
-	std::shared_ptr<T> registrate() override
+	void registrate(vector<shared_ptr<T>>& accountsBASE) override
 	{
-		std::cout << "=Регистрация аккаунта=" << std::endl;
+		cout << "=Регистрация аккаунта=" << std::endl;
 
-		std::string login;
-		std::cout << "Введите логин: ";
-		std::getline(std::cin >> std::ws, login);
+		string login;
+		cout << "Введите логин: ";
+		
+		login = inputCorrectLogin(accountsBASE);
 
-		std::string password;
-		std::cout << "Введите пароль: ";
-		std::getline(std::cin >> std::ws, password);
+		string password;
+		cout << "Введите пароль: ";
+		password = inputPassword();
 
-		std::shared_ptr<T> accountPtr = std::make_shared<T>(login, password);
+		accountsBASE.push_back(make_shared<T>(login, password));
 
-		std::cout << "Спасибо за регистрацию!" << std::endl;
+		cout << "Спасибо за регистрацию!" << endl;
 		system("pause");
+	}
 
-		return accountPtr;
+	string inputCorrectLogin(vector<shared_ptr<T>>& accountsBASE)
+	{
+		string login;
+		while (1)
+		{
+			getline(cin >> ws, login);
+
+			if (isOneWord(login))
+			{
+				if (isEnglish(login))
+				{
+					if (isLoginUnique(login, accountsBASE))
+					{
+						break;
+					}
+				}
+			}
+		}
+		return login;
+	}
+
+	bool isOneWord(string str)
+	{
+		for (int i = 0; i < str.length(); i++)
+		{
+			if (str[i] == ' ')
+			{
+				cout << "\t\t\t| Нельзя вводить больше чем одного слова! (без пробелов)" << endl;
+				return false;
+			}
+		}
+		return true;
+	}
+	bool isEnglish(string str)
+	{
+		for (int i = 0; i < str.length(); i++)
+		{
+			if ((str[i] < 48 || str[i] > 57) && (str[i] < 65 || str[i] > 90) && (str[i] < 97 || str[i] > 122))
+			{
+				cout << "\t\t\t| Должны быть использованы буквы лишь английского алфавита!" << endl;
+				return false;	
+			}
+		}
+		return true;
+	}
+	bool isLoginUnique(string login, vector<shared_ptr<T>>& accountsBASE)
+	{
+		for (const auto& item : accountsBASE )
+		{
+			if (login == item->getLogin())
+			{
+				cout << "\t\t\t| Данный логин уже существует. Попробуйте ещё раз..." << endl << endl;
+				return false;
+			}
+		}
+		return true;
+	}
+
+	bool isPasswordSecure(string password)
+	{
+		bool uppercaseSymbol = false;
+		bool lowercaseSymbol = false;
+		bool digitSymbol = false;
+
+		if (password.length() < 4) {
+			cout << "\t\t\t| Пароль должен состоять как минимум из 4 символов." << endl;
+			cout << endl;
+			return false;
+		}
+
+		for (int i = 0; i < password.length(); i++) {
+			if (isupper(password[i])) {
+				uppercaseSymbol = true;
+			}
+			if (islower(password[i])) {
+				lowercaseSymbol = true;
+			}
+			if (isdigit(password[i])) {
+				digitSymbol = true;
+			}
+		}
+
+		if (!uppercaseSymbol) {
+			cout << "\t\t\t| Пароль должен содержать хотя бы одну заглавную букву." << endl;
+			cout << endl;
+		}
+		if (!lowercaseSymbol) {
+			cout << "\t\t\t| Пароль должен содержать хотя бы одну строчную букву." << endl;
+			cout << endl;
+		}
+		if (!digitSymbol) {
+			cout << "\t\t\t| Пароль должен содержать хотя бы одну цифру." << endl;
+			cout << endl;
+		}
+
+		if (uppercaseSymbol && lowercaseSymbol && digitSymbol) {
+			cout << "\t\t\t| Пароль соответствует требованиям безопасности." << endl;
+			return true;
+		}
+		return false;
+	}
+
+	string inputPassword()
+	{
+		string password;
+		cout << "\t\t\t| Условия ввода пароля:" << endl;
+		cout << "\t\t\t| 1. Пароль должен состоять только из 1 слова" << endl;
+		cout << "\t\t\t| 2. Пароль должен состоять из символов [английского алфавита]" << endl;
+		cout << "\t\t\t| 3. Cодержать в себе как минимум 4 символа(заглавные, строчные буквы и цифры)" << endl;
+		cout << "\t\t\t| Пример надёжного пароля: " << passwordExample << endl;
+		while (1)
+		{
+			cout << "\t\t\t| Введите пароль: ";
+			getline(cin >> ws, password);
+			cout << endl;
+			if (isOneWord(password))
+			{
+				if (isEnglish(password))
+				{
+					if (isPasswordSecure(password))
+					{
+						break;
+					}
+				}
+			}
+		}
+		return password;
 	}
 };
+
 
 template<class T>
 class IAuthenticable
 {
 public:
-	virtual std::shared_ptr<T> authenticate(std::vector<std::shared_ptr<T>>& accountsBASE) = 0;
+	virtual shared_ptr<T> authenticate(vector<shared_ptr<T>>& accountsBASE) = 0;
 };
 template<class T>
 class AuthenticateSystem : public IAuthenticable<T>
 {
 public:
-	std::shared_ptr<T> authenticate(std::vector<std::shared_ptr<T>>& accountsBASE) override
+	shared_ptr<T> authenticate(vector<shared_ptr<T>>& accountsBASE) override
 	{
-		std::string logTry;
-		std::string pasTry;
-		std::cout << "Введите Ваш логин: ";
-		std::getline(std::cin >> std::ws, logTry);
-		std::cout << "Введите Ваш пароль: ";
-		std::getline(std::cin >> std::ws, pasTry);
+		string logTry;
+		string pasTry;
+		cout << "Введите Ваш логин: ";
+		getline(cin >> ws, logTry);
+		cout << "Введите Ваш пароль: ";
+		pasTry = inputPasswordSecure();
 		for (auto& item : accountsBASE)
 		{
 			if (isInit(logTry, pasTry, item->getLogin(), item->getPassword()))
 			{
-				std::cout << "Вы успешно зашли в аккаунт!" << std::endl;
+				cout << "Вы успешно зашли в аккаунт!" << endl;
 				return item;
 			}
 		}
 		return nullptr;
 	}
-	bool isInit(std::string tryLogin, std::string tryPassword, std::string login, std::string password)
+	bool isInit(string tryLogin, string tryPassword, string login, string password)
 	{
 		if (tryLogin == login && tryPassword == password)
 			return true;
 		else
 			return false;
 	}
+	string inputPasswordSecure()
+	{
+		string password;
+		int ch = 0;
+		cout << "\t\t\t| Введите пароль: ";
+		while (1)
+		{
+			ch = _getch(); // 13 - код ENTER
+			if (ch == 13)
+			{
+				break;
+			}
+			else if (ch == 8) // 8 - код BACKSPACE
+			{
+				if (password.length() > 0)
+				{
+					password.erase(password.length() - 1); // удаление последнего символа из строки
+					cout << (char)8 << ' ' << (char)8; //смещаем курсор на 1 влево - скрываем пробелом последний символ(имитируем удаление) - перемещаем курсор обратно на 1 позицию влево.
+				}
+			}
+			else
+			{
+				cout << '*';
+				password += (char)ch;
+			}
+		}
+		cout << endl;
+		return password;
+	}
 };
-
-
 
 
 
@@ -130,42 +288,58 @@ template<class T>
 class FileHandler
 {
 public:
-	static void writeToFile(const std::string& filePath, const std::vector<std::shared_ptr<T>>& BASE)
+	static void writeToFile(const string& filePath, const vector<shared_ptr<T>>& BASE)
 	{
-		std::ofstream file(filePath);
-
-		if (file.is_open())
+		try
 		{
+			ofstream file(filePath);
+
+			if (!file.is_open())
+			{
+				throw runtime_error("Невозможно открыть файл: " + filePath);
+			}
+
 			for (const auto& item : BASE)
 			{
 				file << item;
 			}
+
 			file.close();
 		}
-		else
+		catch (const exception& e)
 		{
-			std::cerr << "Невозможно открыть файл: " << filePath << std::endl;
+			cerr << "Ошибка при записи в файл: " << e.what() << endl;
 		}
 	}
-
-	static std::vector<std::shared_ptr<T>> readFromFile(const std::string& filePath)
+	static vector<shared_ptr<T>> readFromFile(const string& filePath)
 	{
-		std::vector<std::shared_ptr<T>> accountsBASE;
-		std::ifstream file(filePath);
-
-		if (file.is_open())
+		vector<shared_ptr<T>> accountsBASE;
+		try
 		{
-			std::shared_ptr<T> item = std::make_shared<T>();
+			ifstream file(filePath);
+
+			if (!file.good())
+			{
+				return accountsBASE;
+			}
+
+			if (!file.is_open())
+			{
+				throw runtime_error("Невозможно открыть файл: " + filePath);
+			}
+
+			shared_ptr<T> item = make_shared<T>();
 			while (file >> item)
 			{
 				accountsBASE.push_back(item);
-				item = std::make_shared<T>();
+				item = make_shared<T>();
 			}
+
 			file.close();
 		}
-		else
+		catch (const exception& e)
 		{
-			std::cerr << "Невозможно открыть файл: " << filePath << std::endl;
+			cerr << "Ошибка при чтении из файла: " << e.what() << endl;
 		}
 		return accountsBASE;
 	}

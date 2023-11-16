@@ -189,7 +189,7 @@ void userMainMenu::displayMenu(vector<shared_ptr<UserAccount>>& userAccounts) co
 		case 1:
 		{
 			RegistrateSystem<UserAccount> userRegSystem;
-			userAccounts.push_back(userRegSystem.registrate());
+			userRegSystem.registrate(userAccounts);
 			break;
 		}
 		case 2:
