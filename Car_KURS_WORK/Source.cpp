@@ -9,6 +9,7 @@
 
 #include "menu.h"
 #include "tables.h"
+#include "fileHandler.h"
 
 using namespace std;
 

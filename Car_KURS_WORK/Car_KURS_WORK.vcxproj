@@ -141,6 +141,7 @@
     <ClInclude Include="car.h" />
     <ClInclude Include="customer.h" />
     <ClInclude Include="employee.h" />
+    <ClInclude Include="fileHandler.h" />
     <ClInclude Include="helper.h" />
     <ClInclude Include="menu.h" />
     <ClInclude Include="paymentMethods.h" />
