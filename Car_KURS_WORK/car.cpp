@@ -3,7 +3,9 @@
 
 using namespace std;
 
+
 extern vector<shared_ptr<Car>> carBASE;
+
 
 Car::Car() : brand("unkown"), registrationNumber("unknown"), mileAge(0.00), price(0.00), condition("unknown")
 {

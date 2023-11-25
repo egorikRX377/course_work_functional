@@ -115,7 +115,7 @@ public:
 		{
 			if (str[i] == ' ')
 			{
-				cout << "\t\t\t| Нельзя вводить больше чем одного слова! (без пробелов)" << endl;
+				cout << "| Нельзя вводить больше чем одного слова! (без пробелов)" << endl;
 				return false;
 			}
 		}
@@ -127,7 +127,7 @@ public:
 		{
 			if ((str[i] < 48 || str[i] > 57) && (str[i] < 65 || str[i] > 90) && (str[i] < 97 || str[i] > 122))
 			{
-				cout << "\t\t\t| Должны быть использованы буквы лишь английского алфавита!" << endl;
+				cout << "| Должны быть использованы буквы лишь английского алфавита!" << endl;
 				return false;	
 			}
 		}
@@ -139,7 +139,7 @@ public:
 		{
 			if (login == item->getLogin())
 			{
-				cout << "\t\t\t| Данный логин уже существует. Попробуйте ещё раз..." << endl << endl;
+				cout << "| Данный логин уже существует. Попробуйте ещё раз..." << endl << endl;
 				return false;
 			}
 		}
@@ -153,7 +153,7 @@ public:
 		bool digitSymbol = false;
 
 		if (password.length() < 4) {
-			cout << "\t\t\t| Пароль должен состоять как минимум из 4 символов." << endl;
+			cout << "| Пароль должен состоять как минимум из 4 символов." << endl;
 			cout << endl;
 			return false;
 		}
@@ -171,20 +171,20 @@ public:
 		}
 
 		if (!uppercaseSymbol) {
-			cout << "\t\t\t| Пароль должен содержать хотя бы одну заглавную букву." << endl;
+			cout << "| Пароль должен содержать хотя бы одну заглавную букву." << endl;
 			cout << endl;
 		}
 		if (!lowercaseSymbol) {
-			cout << "\t\t\t| Пароль должен содержать хотя бы одну строчную букву." << endl;
+			cout << "| Пароль должен содержать хотя бы одну строчную букву." << endl;
 			cout << endl;
 		}
 		if (!digitSymbol) {
-			cout << "\t\t\t| Пароль должен содержать хотя бы одну цифру." << endl;
+			cout << "| Пароль должен содержать хотя бы одну цифру." << endl;
 			cout << endl;
 		}
 
 		if (uppercaseSymbol && lowercaseSymbol && digitSymbol) {
-			cout << "\t\t\t| Пароль соответствует требованиям безопасности." << endl;
+			cout << "| Пароль соответствует требованиям безопасности." << endl;
 			return true;
 		}
 		return false;
@@ -200,7 +200,7 @@ public:
 		cout << "\t\t\t| Пример надёжного пароля: " << examples::passwordExample << endl;
 		while (1)
 		{
-			cout << "\t\t\t| Введите пароль: ";
+			cout << "| Введите пароль: ";
 			getline(cin >> ws, password);
 			cout << endl;
 			if (isOneWord(password))

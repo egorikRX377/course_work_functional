@@ -10,6 +10,8 @@
 #include <time.h>	
 #include <stdlib.h>
 
+#include "helper.h"
+
 
 using namespace std;
 

@@ -15,7 +15,7 @@ void userFunctionalMenu::displayMenu(Customer& customer) const
 		cout << "5. Заказать автомобиль" << endl;
 		cout << "6. Выйти из функционального меню пользователя" << endl;
 		int choice;
-		cin >> choice;
+		choice = correctNumberInput<int>();
 		switch (choice)
 		{
 		case 1:
@@ -70,7 +70,7 @@ void adminFunctionalMenu::displayMenu(Employee& employee) const
 		cout << "10. Отсортировать договора по параметрам" << endl;
 		cout << "11. Выйти из функционального меню пользователя" << endl;
 		int choice;
-		cin >> choice;
+		choice = correctNumberInput<int>();
 		switch (choice)
 		{
 		case 1:
@@ -144,7 +144,7 @@ void adminMainMenu::displayMenu(vector<shared_ptr<AdminAccount>>& adminAccounts)
 		cout << "1. Вход в аккаунт администратора" << endl;
 		cout << "2. Выйти из главного меню" << endl;
 		int choice;
-		cin >> choice;
+		choice = correctNumberInput<int>();
 		switch (choice)
 		{
 		case 1:
@@ -159,9 +159,9 @@ void adminMainMenu::displayMenu(vector<shared_ptr<AdminAccount>>& adminAccounts)
 				adminFunctionalMenu functionalMenu;
 				functionalMenu.displayMenu(employee);
 			}
-			catch (const std::exception& e)
+			catch (const exception& e)
 			{
-				std::cerr << "Error: " << e.what() << std::endl;
+				cerr << "Ошибка: " << e.what() << std::endl;
 			}
 			break;
 		}
@@ -183,7 +183,7 @@ void userMainMenu::displayMenu(vector<shared_ptr<UserAccount>>& userAccounts) co
 		cout << "2. Вход в аккаунт пользователя" << endl;
 		cout << "3. Выйти из главного меню" << endl;
 		int choice;
-		cin >> choice;
+		choice = correctNumberInput<int>();
 		switch (choice)
 		{
 		case 1:
@@ -204,9 +204,9 @@ void userMainMenu::displayMenu(vector<shared_ptr<UserAccount>>& userAccounts) co
 				userFunctionalMenu functionalMenu;
 				functionalMenu.displayMenu(customer);
 			}
-			catch (const std::exception& e)
+			catch (const exception& e)
 			{
-				std::cerr << "Error: " << e.what() << std::endl;
+				cerr << "Ошибка: " << e.what() << std::endl;
 			}
 			break;
 		}
@@ -229,7 +229,7 @@ void statusMenu::displayMenu(vector<shared_ptr<UserAccount>>& userAccounts, vect
 		cout << "2. Администратор" << endl;
 		cout << "3. Выйти из меню выбора статуса" << endl;
 		int choice;
-		cin >> choice;
+		choice = correctNumberInput<int>();
 		switch (choice)
 		{
 		case 1:

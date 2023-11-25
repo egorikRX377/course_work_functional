@@ -31,7 +31,7 @@ void PaymentMethod::inputPeriod()
 	{
 		int somePeriod;
 		bool correctInput = false;
-		cin >> somePeriod;
+		somePeriod = correctNumberInput<int>();
 		switch (somePeriod)
 		{
 		case oneYear:
