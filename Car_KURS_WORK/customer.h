@@ -18,8 +18,8 @@ using namespace std;
 namespace filePATHS
 {
 	const string customerPATH = "customers.txt";
+	const string contractsPATH = "saleContracts.txt";
 }
-
 
 
 class saleContract;

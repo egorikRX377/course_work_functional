@@ -1,5 +1,6 @@
-#include "saleContract.h"
 #include "helper.h"
+#include "car.h"
+#include "customer.h"
 
 using namespace std;
 

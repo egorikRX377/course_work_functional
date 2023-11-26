@@ -9,8 +9,8 @@
 
 #include "reg_log_area.h"
 #include "car.h"
-#include "saleContract.h"
 #include "tables.h"
+#include "customer.h"
 
 using namespace std;
 

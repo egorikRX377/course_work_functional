@@ -62,9 +62,6 @@
     <ClInclude Include="customer.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="saleContract.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="paymentMethods.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>

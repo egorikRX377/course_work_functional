@@ -152,7 +152,6 @@
     <ClInclude Include="menu.h" />
     <ClInclude Include="paymentMethods.h" />
     <ClInclude Include="reg_log_area.h" />
-    <ClInclude Include="saleContract.h" />
     <ClInclude Include="tables.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

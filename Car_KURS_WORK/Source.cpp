@@ -26,10 +26,8 @@ int main()
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 
-	// Получаем дескриптор консоли
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
-	// Устанавливаем цвет текста
 	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_INTENSITY);
 
 

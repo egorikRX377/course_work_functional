@@ -15,9 +15,9 @@ using namespace std;
 
 
 template<class T>
-int generateUniqueID(const vector<shared_ptr<T>>& anyBASE)
+int generateUniqueID(vector<shared_ptr<T>>& anyBASE)
 {
-	srand(time(NULL));
+	srand(static_cast<unsigned int>(time(NULL)));
 	while (1)
 	{
 		int id = rand() % 10000;
@@ -40,7 +40,7 @@ int generateUniqueID(const vector<shared_ptr<T>>& anyBASE)
 template<class T>
 T correctNumberInput()
 {
-	T number;
+	T number = 0;
 	while (true)
 	{
 		cin >> number;

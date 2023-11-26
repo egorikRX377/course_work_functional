@@ -11,7 +11,6 @@
 #include "reg_log_area.h"
 #include "employee.h"
 #include "customer.h"
-#include "saleContract.h"
 #include "tables.h"
 
 using namespace std;
