@@ -41,15 +41,15 @@ void Car::setCondition(string condition) { this->condition = condition; }
 
 void Car::displayCarInfo() const
 {
-	cout << '|' << setw(5) << left << setfill(' ') << getID() << '|' << setw(20) << left << setfill(' ') << getBrand() << '|' << setw(25) << left << getRegistrationNumber() << '|' << setw(10) << left << getMileAge() << '|' << setw(10) << left << getPrice() << '|' << setw(20) << left << getCondition() << '|' << endl;
-	cout << '|' << setw(5) << right << setfill('=') << "" << setw(20) << left << setfill('=') << "" << setw(25) << left << setfill('=') << "" << setw(10) << left << "" << setw(10) << left << "" << setw(25) << left << "" << '|' << endl;
+	cout << "\t\t\t" << '|' << setw(5) << left << setfill(' ') << getID() << '|' << setw(20) << left << setfill(' ') << getBrand() << '|' << setw(25) << left << getRegistrationNumber() << '|' << setw(10) << left << getMileAge() << '|' << setw(10) << left << getPrice() << '|' << setw(20) << left << getCondition() << '|' << endl;
+	cout << "\t\t\t" << '|' << setw(5) << right << setfill('=') << "" << setw(20) << left << setfill('=') << "" << setw(25) << left << setfill('=') << "" << setw(10) << left << "" << setw(10) << left << "" << setw(25) << left << "" << '|' << endl;
 }
 
 void Car::spcDisplayCarInfo() const
 {
-	cout << "=====================================================" << endl;
-	cout << "Марка: " << brand << endl;
-	cout << "Регистрационный номер: " << registrationNumber << endl;
+	cout << "\t\t\t" << "| =====================================================" << endl;
+	cout << "\t\t\t" << "| Марка: " << brand << endl;
+	cout << "\t\t\t" << "| Регистрационный номер: " << registrationNumber << endl;
 }
 
 ostream& operator<<(ostream& buf, const shared_ptr<Car>& carPtr)

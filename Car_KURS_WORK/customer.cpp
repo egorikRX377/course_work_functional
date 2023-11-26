@@ -30,27 +30,32 @@ void Customer::setAddress(string address) { this->address = address; }
 
 void Customer::displayCustomerInfo()
 {
-	cout << "Имя заказчика: " << name << endl;
-	cout << "Адрес заказчика: " << address << endl;
+	cout << "\t\t\t| Имя заказчика: " << name << endl;
+	cout << "\t\t\t| Адрес заказчика: " << address << endl;
 }
 
 void Customer::inputDataAboutYourSelf()
 {
-	cout << "Введите ваше имя: ";
+	cout << "\t\t\t| Введите ваше имя: ";
 	getline(cin >> ws, name);
-	cout << "Введите ваш адрес: ";
+	cout << "\t\t\t| Введите ваш адрес: ";
 	getline(cin >> ws, address);
 }
 
 
 void Customer::printAllCarInfo(const vector <shared_ptr<Car>>& carBASE, Table<Car>& table)
 {
+	system("cls");
+
 	if (carBASE.size() == 0)
 	{
-		cout << "Информация об автомобилях отсутствует" << endl;
+		cout << endl << endl << endl << endl << endl;
+		cout << "\t\t\t" << "| Информация об автомобилях отсутствует" << endl;
+		cout << "\t\t\t| "; system("pause");
 		return;
 	}
 	table.displayTable(carBASE);
+	system("pause");
 	return;
 }
 
@@ -61,10 +66,10 @@ void Customer::sortCarInfo(vector <shared_ptr<Car>>& carBASE)
 	{
 		cout << "\t\t\t_________________________________________________________________________________________________\n\n\n";
 		cout << "\t\t\t________________________  ОТСОРТИРОВАТЬ ИНФОРМАЦИЮ О МАШИНАХ ПО ПАРАМЕТРУ_________________________\n\n";
-		cout << "1. Отсортировать машины по марке (в алфавитном порядке)" << endl;
-		cout << "2. Отсортировать машины по пробегу (в порядке возрастания)" << endl;
-		cout << "3. Отсортировать машины по цене (в порядке убывания)" << endl;
-		cout << "4. Выйти из меню сортировки" << endl;
+		cout << "\t\t\t| 1. Отсортировать машины по марке (в алфавитном порядке)" << endl;
+		cout << "\t\t\t| 2. Отсортировать машины по пробегу (в порядке возрастания)" << endl;
+		cout << "\t\t\t| 3. Отсортировать машины по цене (в порядке убывания)" << endl;
+		cout << "\t\t\t| 4. Выйти из меню сортировки" << endl;
 		int choice;
 		
 		choice = correctNumberInput<int>();
@@ -95,7 +100,7 @@ void Customer::sortCarInfo(vector <shared_ptr<Car>>& carBASE)
 			return;
 		}
 		default:
-			cout << "Не верный выбор!" << endl;
+			cout << "\t\t\t| Не верный выбор!" << endl;
 		}
 	}
 }
@@ -106,10 +111,10 @@ void Customer::findCarInfo(const vector <shared_ptr<Car>>& carBASE)
 	{
 		cout << "\t\t\t_________________________________________________________________________________________________\n\n\n";
 		cout << "\t\t\t________________________  НАЙТИ ИНФОРМАЦИЮ О МАШИНАХ ПО ПАРАМЕТРУ_________________________\n\n";
-		cout << "1. Найти машину по марке" << endl;
-		cout << "2. Найти машину по регистрационному номеру" << endl;
-		cout << "3. Найти машину по цене" << endl;
-		cout << "4. Выйти из меню поиска" << endl;
+		cout << "\t\t\t| 1. Найти машину по марке" << endl;
+		cout << "\t\t\t| 2. Найти машину по регистрационному номеру" << endl;
+		cout << "\t\t\t| 3. Найти машину по цене" << endl;
+		cout << "\t\t\t| 4. Выйти из меню поиска" << endl;
 		int choice;
 		choice = correctNumberInput<int>();
 		switch (choice)
@@ -117,10 +122,10 @@ void Customer::findCarInfo(const vector <shared_ptr<Car>>& carBASE)
 		case 1:
 		{
 			string brand;
-			cout << "Введите марку автомобиля: ";
+			cout << "\t\t\t| Введите марку автомобиля: ";
 			getline(cin >> ws, brand);
 			auto iter = find_if(carBASE.begin(), carBASE.end(), [&brand](const shared_ptr<Car>& a) { return a->getBrand() == brand; });
-			if (iter == carBASE.end()) { cout << "Автомобиля, с такой маркой не было найдено!" << endl; system("pause"); break; }
+			if (iter == carBASE.end()) { cout << "\t\t\t| Автомобиля, с такой маркой не было найдено!" << endl; system("pause"); break; }
 			(*iter)->displayCarInfo();
 			system("pause");
 			break;
@@ -128,10 +133,10 @@ void Customer::findCarInfo(const vector <shared_ptr<Car>>& carBASE)
 		case 2:
 		{
 			string regNumber;
-			cout << "Введите регистрационный номер автомобиля: ";
+			cout << "\t\t\t| Введите регистрационный номер автомобиля: ";
 			getline(cin >> ws, regNumber);
 			auto iter = find_if(carBASE.begin(), carBASE.end(), [&regNumber](const shared_ptr<Car>& a) { return a->getRegistrationNumber() == regNumber; });
-			if (iter == carBASE.end()) { cout << "Автомобиля, с таким регистрационным номером не было найдено!" << endl; system("pause"); break; }
+			if (iter == carBASE.end()) { cout << "\t\t\t| Автомобиля, с таким регистрационным номером не было найдено!" << endl; system("pause"); break; }
 			(*iter)->displayCarInfo();
 			system("pause");
 			break;
@@ -139,10 +144,10 @@ void Customer::findCarInfo(const vector <shared_ptr<Car>>& carBASE)
 		case 3:
 		{
 			double price;
-			cout << "Введите цену автомобиля: ";
+			cout << "\t\t\t| Введите цену автомобиля: ";
 			price = correctNumberInput<int>();
 			auto iter = find_if(carBASE.begin(), carBASE.end(), [&price](const shared_ptr<Car>& a) { return a->getPrice() == price; });
-			if (iter == carBASE.end()) { cout << "Автомобиля, с такой ценой не было найдено!" << endl; system("pause");  break; }
+			if (iter == carBASE.end()) { cout << "\t\t\t| Автомобиля, с такой ценой не было найдено!" << endl; system("pause");  break; }
 			(*iter)->displayCarInfo();
 			system("pause");
 			break;
@@ -152,7 +157,7 @@ void Customer::findCarInfo(const vector <shared_ptr<Car>>& carBASE)
 			return;
 		}
 		default:
-			cout << "Не верный выбор!" << endl;
+			cout << "\t\t\t| Не верный выбор!" << endl;
 		}
 	}
 }
@@ -170,10 +175,10 @@ void Customer::filtrateCarInfo(const vector <shared_ptr<Car>>& carBASE)
 	{
 		cout << "\t\t\t_________________________________________________________________________________________________\n\n\n";
 		cout << "\t\t\t________________________ ОТФИЛЬТРОВАТЬ ИНФОРМАЦИЮ О МАШИНАХ ПО ПАРАМЕТРУ_________________________\n\n";
-		cout << "1. Задать необходимые марки автомобилей:" << endl;
-		cout << "2. Задать необходимый диапазон цен" << endl;
-		cout << "3. Задать максимальный пробег" << endl;
-		cout << "4. Выйти из меню задания параметров фильтрации" << endl;
+		cout << "\t\t\t| 1. Задать необходимые марки автомобилей:" << endl;
+		cout << "\t\t\t| 2. Задать необходимый диапазон цен" << endl;
+		cout << "\t\t\t| 3. Задать максимальный пробег" << endl;
+		cout << "\t\t\t| 4. Выйти из меню задания параметров фильтрации" << endl;
 		int choice;
 
 		choice = correctNumberInput<int>();
@@ -183,7 +188,7 @@ void Customer::filtrateCarInfo(const vector <shared_ptr<Car>>& carBASE)
 		case 1:
 		{
 			string input;
-			cout << "Введите марки необходимых автомобилей (марки разделяйте символом ':') : ";
+			cout << "\t\t\t| Введите марки необходимых автомобилей (марки разделяйте символом ':') : ";
 			getline(cin >> ws, input);
 			istringstream carBrands(input);
 
@@ -210,17 +215,17 @@ void Customer::filtrateCarInfo(const vector <shared_ptr<Car>>& carBASE)
 		}
 		case 2:
 		{
-			cout << "//Введите диапазон цен//" << endl;
-			cout << "Минимальная цена: ";
+			cout << "\t\t\t| //Введите диапазон цен//" << endl;
+			cout << "\t\t\t| Минимальная цена: ";
 			cin >> minPrice;
-			cout << "Максимальная цена: ";
+			cout << "\t\t\t| Максимальная цена: ";
 			cin >> maxPrice;
 			system("pause");
 			break;
 		}
 		case 3:
 		{
-			cout << "Введите максимальный пробег необходимых автомобилей: ";
+			cout << "\t\t\t| Введите максимальный пробег необходимых автомобилей: ";
 			cin >> maxMileAge;
 			system("pause");
 			break;
@@ -230,7 +235,7 @@ void Customer::filtrateCarInfo(const vector <shared_ptr<Car>>& carBASE)
 			break;
 		}
 		default:
-			cout << "Не верный выбор!" << endl;
+			cout << "\t\t\t| Не верный выбор!" << endl;
 		}
 		if (choice == 4)
 		{
@@ -255,7 +260,7 @@ void Customer::filtrateCarInfo(const vector <shared_ptr<Car>>& carBASE)
 			}
 		}
 	}
-	if (!isExist) { cout << "Не было найдено автомобилей по заданным параметрам" << endl; }
+	if (!isExist) { cout << "\t\t\t| Не было найдено автомобилей по заданным параметрам" << endl; }
 	system("pause");
 	return;
 }
@@ -287,9 +292,9 @@ void Customer::orderCar(vector <shared_ptr<Car>>& carBASE)
 
 			shared_ptr<PaymentMethod> method;
 
-			cout << "Выберете способ оплаты: " << endl;
-			cout << "1. Рассрочка" << endl;
-			cout << "2. Лизинг" << endl;
+			cout << "\t\t\t| Выберете способ оплаты: " << endl;
+			cout << "\t\t\t| 1. Рассрочка" << endl;
+			cout << "\t\t\t| 2. Лизинг" << endl;
 			int paymentChoice;
 
 			paymentChoice = correctNumberInput<int>();
@@ -307,14 +312,14 @@ void Customer::orderCar(vector <shared_ptr<Car>>& carBASE)
 				break;
 			}
 			default:
-				cout << "Не верный выбор!" << endl;
+				cout << "\t\t\t| Не верный выбор!" << endl;
 			}
 
 			shared_ptr<saleContract> contract = make_shared<saleContract>(*this, *carBASE.at(i), method);
 			contract->displayContractInfo();
-			cout << "Вы согласны с договором купли-продажи?" << endl;
-			cout << "1. Да" << endl;
-			cout << "2. Нет (Отменить заказ)" << endl;
+			cout << "\t\t\t| Вы согласны с договором купли-продажи?" << endl;
+			cout << "\t\t\t| 1. Да" << endl;
+			cout << "\t\t\t| 2. Нет (Отменить заказ)" << endl;
 			int choice;
 			choice = correctNumberInput<int>();
 			switch (choice)
@@ -324,7 +329,7 @@ void Customer::orderCar(vector <shared_ptr<Car>>& carBASE)
 				isAgree = true;
 				contractBASE.push_back(contract);
 				carBASE.erase(carBASE.begin() + i);
-				cout << "Заказ принят!" << endl;
+				cout << "\t\t\t| Заказ принят!" << endl;
 				break;
 			}
 			case 2:
@@ -332,7 +337,7 @@ void Customer::orderCar(vector <shared_ptr<Car>>& carBASE)
 				break;
 			}
 			default:
-				cout << "Не верный ввод!" << endl;
+				cout << "\t\t\t| Не верный ввод!" << endl;
 			}
 			break;
 		}
@@ -344,7 +349,7 @@ void Customer::orderCar(vector <shared_ptr<Car>>& carBASE)
 	}
 	else if (!isAgree)
 	{
-		cout << "Заказ отменён!" << endl;
+		cout << "\t\t\t| Заказ отменён!" << endl;
 		system("pause");
 	}
 }

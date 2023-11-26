@@ -72,22 +72,20 @@ class RegistrateSystem : public IRegistrable<T>
 public:
 	void registrate(vector<shared_ptr<T>>& accountsBASE) override
 	{
-		cout << "=Регистрация аккаунта=" << std::endl;
+		cout << "\t\t\t_________________________________________________________________________________________________\n\n\n";
+		cout << "\t\t\t__________________________________  РЕГИСТРАЦИЯ АККАУНТА ________________________________________\n\n";
 
 		string login;
-		cout << "Введите логин: ";
-		
 		login = inputCorrectLogin(accountsBASE);
 
 		string password;
-		cout << "Введите пароль: ";
 		password = inputPassword();
 
 		string hashedPassword = hashPassword(password);
 
 		accountsBASE.push_back(make_shared<T>(login, hashedPassword));
 
-		cout << "Спасибо за регистрацию!" << endl;
+		cout << "\t\t\t| Спасибо за регистрацию!" << endl;
 		system("pause");
 	}
 
@@ -96,8 +94,8 @@ public:
 		string login;
 		while (1)
 		{
+			cout << "\t\t\t| Введите логин: ";
 			getline(cin >> ws, login);
-
 			if (isOneWord(login))
 			{
 				if (isEnglish(login))
@@ -118,7 +116,7 @@ public:
 		{
 			if (str[i] == ' ')
 			{
-				cout << "| Нельзя вводить больше чем одного слова! (без пробелов)" << endl;
+				cout << "\t\t\t| Нельзя вводить больше чем одного слова! (без пробелов)" << endl;
 				return false;
 			}
 		}
@@ -130,7 +128,7 @@ public:
 		{
 			if ((str[i] < 48 || str[i] > 57) && (str[i] < 65 || str[i] > 90) && (str[i] < 97 || str[i] > 122))
 			{
-				cout << "| Должны быть использованы буквы лишь английского алфавита!" << endl;
+				cout << "\t\t\t| Должны быть использованы буквы лишь английского алфавита!" << endl;
 				return false;	
 			}
 		}
@@ -142,7 +140,7 @@ public:
 		{
 			if (login == item->getLogin())
 			{
-				cout << "| Данный логин уже существует. Попробуйте ещё раз..." << endl << endl;
+				cout << "\t\t\t| Данный логин уже существует. Попробуйте ещё раз..." << endl << endl;
 				return false;
 			}
 		}
@@ -156,7 +154,7 @@ public:
 		bool digitSymbol = false;
 
 		if (password.length() < 4) {
-			cout << "| Пароль должен состоять как минимум из 4 символов." << endl;
+			cout << "\t\t\t| Пароль должен состоять как минимум из 4 символов." << endl;
 			cout << endl;
 			return false;
 		}
@@ -174,20 +172,20 @@ public:
 		}
 
 		if (!uppercaseSymbol) {
-			cout << "| Пароль должен содержать хотя бы одну заглавную букву." << endl;
+			cout << "\t\t\t| Пароль должен содержать хотя бы одну заглавную букву." << endl;
 			cout << endl;
 		}
 		if (!lowercaseSymbol) {
-			cout << "| Пароль должен содержать хотя бы одну строчную букву." << endl;
+			cout << "\t\t\t| Пароль должен содержать хотя бы одну строчную букву." << endl;
 			cout << endl;
 		}
 		if (!digitSymbol) {
-			cout << "| Пароль должен содержать хотя бы одну цифру." << endl;
+			cout << "\t\t\t| Пароль должен содержать хотя бы одну цифру." << endl;
 			cout << endl;
 		}
 
 		if (uppercaseSymbol && lowercaseSymbol && digitSymbol) {
-			cout << "| Пароль соответствует требованиям безопасности." << endl;
+			cout << "\t\t\t| Пароль соответствует требованиям безопасности." << endl;
 			return true;
 		}
 		return false;
@@ -203,7 +201,7 @@ public:
 		cout << "\t\t\t| Пример надёжного пароля: " << examples::passwordExample << endl;
 		while (1)
 		{
-			cout << "| Введите пароль: ";
+			cout << "\t\t\t| Введите пароль: ";
 			getline(cin >> ws, password);
 			cout << endl;
 			if (isOneWord(password))
@@ -235,7 +233,7 @@ public:
 	shared_ptr<T> authenticate(vector<shared_ptr<T>>& accountsBASE) override
 	{
 		string logTry;
-		cout << "Введите Ваш логин: ";
+		cout << "\t\t\t| Введите Ваш логин: ";
 		getline(cin >> ws, logTry);
 
 		string pasTry;
@@ -246,6 +244,8 @@ public:
 		auto item = find_if(accountsBASE.begin(), accountsBASE.end(), [&logTry, &pasTry](shared_ptr<T>& a) { return ((a->getLogin() == logTry) && (a->getPassword() == pasTry)); });
 		if (item != accountsBASE.end())
 		{
+			cout << "\t\t\t| Вы успешно вошли в аккаунт!" << endl;
+			system("pause");
 			return *item;
 		}
 		else
@@ -257,7 +257,7 @@ public:
 	{
 		string password;
 		int ch = 0;
-		cout << "| Введите пароль: ";
+		cout << "\t\t\t| Введите пароль: ";
 		while (1)
 		{
 			ch = _getch(); // 13 - код ENTER

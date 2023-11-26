@@ -53,7 +53,7 @@ void PaymentMethod::inputPeriod()
 			break;
 		}
 		default:
-			cout << "Не верный ввод!" << endl;
+			cout << "\t\t\t| Не верный ввод!" << endl;
 		}
 		if (correctInput)
 		{
@@ -84,24 +84,24 @@ InstallmentPayment::InstallmentPayment(double cost)
 {
 	this->methodName = "Рассрочка";
 	this->cost = cost;
-	cout << "Введите первоначальный взнос: ";
+	cout << "\t\t\t| Введите первоначальный взнос: ";
 	cin >> fee;
 	this->percent = 10;
-	cout << "Введите срок выплат: 12/36/60 :  ";
+	cout << "\t\t\t| Введите срок выплат: 12/36/60 :  ";
 	inputPeriod();
 	monthlyFee = calcMonthlyFee();
 	resultCost = calcResultCost(monthlyFee);
 }
 void InstallmentPayment::displayPaymentInfo()
 {
-	cout << "=====================================================" << endl;
-	cout << "Выбран метод оплаты: " << methodName << endl;
-	cout << "Cтоимость автомобиля: " << cost << endl;
-	cout << "Первоначальный взнос: " << fee << endl;
-	cout << "Период выплат: " << period << endl;
-	cout << "Ежемесячный платёж с учётом процента: " << monthlyFee << endl;
-	cout << "Результирующая стоимость: " << resultCost << endl;
-	cout << "=====================================================" << endl;
+	cout << "\t\t\t| =====================================================" << endl;
+	cout << "\t\t\t| Выбран метод оплаты: " << methodName << endl;
+	cout << "\t\t\t| Cтоимость автомобиля: " << cost << endl;
+	cout << "\t\t\t| Первоначальный взнос: " << fee << endl;
+	cout << "\t\t\t| Период выплат: " << period << endl;
+	cout << "\t\t\t| Ежемесячный платёж с учётом процента: " << monthlyFee << endl;
+	cout << "\t\t\t| Результирующая стоимость: " << resultCost << endl;
+	cout << "\t\t\t| =====================================================" << endl;
 }
 
 Leasing::Leasing() {}
@@ -110,7 +110,7 @@ Leasing::Leasing(double cost)
 	this->methodName = "Лизинг";
 	this->cost = cost;
 	this->percent = 8;
-	cout << "Введите срок аренды: 12/36/60 :  ";
+	cout << "\t\t\t| Введите срок аренды: 12/36/60 :  ";
 	inputPeriod();
 	fee = 0.6 * cost;
 	monthlyFee = calcMonthlyFee();
@@ -118,12 +118,12 @@ Leasing::Leasing(double cost)
 }
 void Leasing::displayPaymentInfo()
 {
-	cout << "=====================================================" << endl;
-	cout << "Выбран метод оплаты: " << methodName << endl;
-	cout << "Стоимость автомобиля: " << cost << endl;
-	cout << "Остаточная стоимость: " << fee << endl;
-	cout << "Период аренды: " << period << endl;
-	cout << "Ежемесячный платёж с учётом процента: " << monthlyFee << endl;
-	cout << "Результирующая стоимость: " << resultCost << endl;
-	cout << "=====================================================" << endl;
+	cout << "\t\t\t| =====================================================" << endl;
+	cout << "\t\t\t| Выбран метод оплаты: " << methodName << endl;
+	cout << "\t\t\t| Стоимость автомобиля: " << cost << endl;
+	cout << "\t\t\t| Остаточная стоимость: " << fee << endl;
+	cout << "\t\t\t| Период аренды: " << period << endl;
+	cout << "\t\t\t| Ежемесячный платёж с учётом процента: " << monthlyFee << endl;
+	cout << "\t\t\t| Результирующая стоимость: " << resultCost << endl;
+	cout << "\t\t\t| =====================================================" << endl;
 }

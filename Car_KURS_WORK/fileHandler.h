@@ -23,7 +23,7 @@ public:
 
 			if (!file.is_open())
 			{
-				throw runtime_error("Невозможно открыть файл: " + filePath);
+				throw runtime_error("\t\t\t| Невозможно открыть файл: " + filePath);
 			}
 
 			for (const auto& item : BASE)
@@ -35,7 +35,7 @@ public:
 		}
 		catch (const exception& e)
 		{
-			cerr << "Ошибка при записи в файл: " << e.what() << endl;
+			cerr << "\t\t\t| Ошибка при записи в файл: " << e.what() << endl;
 		}
 	}
 	static vector<shared_ptr<T>> readFromFile(const string& filePath)
@@ -52,7 +52,7 @@ public:
 
 			if (!file.is_open())
 			{
-				throw runtime_error("Невозможно открыть файл: " + filePath);
+				throw runtime_error("\t\t\t| Невозможно открыть файл: " + filePath);
 			}
 
 			shared_ptr<T> item = make_shared<T>();
@@ -66,7 +66,7 @@ public:
 		}
 		catch (const exception& e)
 		{
-			cerr << "Ошибка при чтении из файла: " << e.what() << endl;
+			cerr << "\t\t\t| Ошибка при чтении из файла: " << e.what() << endl;
 		}
 		return accountsBASE;
 	}

@@ -7,13 +7,16 @@ void userFunctionalMenu::displayMenu(Customer& customer) const
 {
 	while (1)
 	{
-		cout << "=================ФУНКЦИОНАЛЬНОЕ МЕНЮ ПОЛЬЗОВАТЕЛЯ================" << endl;
-		cout << "1. Посмотреть информацию об автомобилях" << endl;
-		cout << "2. Сортировать информацию об автомобилях (по параметру)" << endl;
-		cout << "3. Искать информацию об автомобилях (по параметру)" << endl;
-		cout << "4. Фильтровать информацию об автомобилях (по параметрам)" << endl;
-		cout << "5. Заказать автомобиль" << endl;
-		cout << "6. Выйти из функционального меню пользователя" << endl;
+		system("cls");
+		cout << "\t\t\t_____________________________________________________________________________________________________________\n\n\n";
+		cout << "\t\t\t__________________________________  ФУНКЦИОНАЛЬНОЕ МЕНЮ ПОЛЬЗОВАТЕЛЯ ________________________________________\n\n";
+
+		cout << "\t\t\t| 1. Посмотреть информацию об автомобилях" << endl;
+		cout << "\t\t\t| 2. Сортировать информацию об автомобилях (по параметру)" << endl;
+		cout << "\t\t\t| 3. Искать информацию об автомобилях (по параметру)" << endl;
+		cout << "\t\t\t| 4. Фильтровать информацию об автомобилях (по параметрам)" << endl;
+		cout << "\t\t\t| 5. Заказать автомобиль" << endl;
+		cout << "\t\t\t| 6. Выйти из функционального меню пользователя" << endl;
 		int choice;
 		choice = correctNumberInput<int>();
 		switch (choice)
@@ -49,7 +52,7 @@ void userFunctionalMenu::displayMenu(Customer& customer) const
 			return;
 		}
 		default:
-			cout << "Не верный ввод!" << endl;
+			cout << "\t\t\t| Не верный ввод!" << endl;
 		}
 	}
 }
@@ -57,18 +60,20 @@ void adminFunctionalMenu::displayMenu(Employee& employee) const
 {
 	while (1)
 	{
-		cout << "=================ФУНКЦИОНАЛЬНОЕ МЕНЮ ПОЛЬЗОВАТЕЛЯ================" << endl;
-		cout << "1. Посмотреть информацию об автомобилях" << endl;
-		cout << "2. Добавить информацию об автомобилях" << endl;
-		cout << "3. Удалить информацию об автомобилях" << endl;
-		cout << "4. Редактировать информацию об автомобилях" << endl;
-		cout << "5. Сортировать информацию об автомобилях (по параметру)" << endl;
-		cout << "6. Искать информацию об автомобилях (по параметру)" << endl;
-		cout << "7. Фильтровать информацию об автомобилях (по параметрам)" << endl << endl;
-		cout << "8. Посмотреть информацию о договорах купли-продажи" << endl;
-		cout << "9. Найти договора по параметрам" << endl;
-		cout << "10. Отсортировать договора по параметрам" << endl;
-		cout << "11. Выйти из функционального меню пользователя" << endl;
+		system("cls");
+		cout << "\t\t\t_______________________________________________________________________________________________________________\n\n\n";
+		cout << "\t\t\t____________________________________  ФУНКЦИОНАЛЬНОЕ МЕНЮ АДМИНИСТРАТОРА ______________________________________\n\n";
+		cout << "\t\t\t| 1. Посмотреть информацию об автомобилях" << endl;
+		cout << "\t\t\t| 2. Добавить информацию об автомобилях" << endl;
+		cout << "\t\t\t| 3. Удалить информацию об автомобилях" << endl;
+		cout << "\t\t\t| 4. Редактировать информацию об автомобилях" << endl;
+		cout << "\t\t\t| 5. Сортировать информацию об автомобилях (по параметру)" << endl;
+		cout << "\t\t\t| 6. Искать информацию об автомобилях (по параметру)" << endl;
+		cout << "\t\t\t| 7. Фильтровать информацию об автомобилях (по параметрам)" << endl << endl;
+		cout << "\t\t\t| 8. Посмотреть информацию о договорах купли-продажи" << endl;
+		cout << "\t\t\t| 9. Найти договора по параметрам" << endl;
+		cout << "\t\t\t| 10. Отсортировать договора по параметрам" << endl;
+		cout << "\t\t\t| 11. Выйти из функционального меню пользователя" << endl;
 		int choice;
 		choice = correctNumberInput<int>();
 		switch (choice)
@@ -129,7 +134,7 @@ void adminFunctionalMenu::displayMenu(Employee& employee) const
 			return;
 		}
 		default:
-			cout << "Не верный ввод!" << endl;
+			cout << "\t\t\t| Не верный ввод!" << endl;
 		}
 	}
 }
@@ -140,9 +145,11 @@ void adminMainMenu::displayMenu(vector<shared_ptr<AdminAccount>>& adminAccounts)
 {
 	while (1)
 	{
-		cout << "=================ГЛАВНОЕ МЕНЮ АДМИНИСТРАТОРА================" << endl;
-		cout << "1. Вход в аккаунт администратора" << endl;
-		cout << "2. Выйти из главного меню" << endl;
+		system("cls");
+		cout << "\t\t\t_____________________________________________________________________________________________________________\n\n\n";
+		cout << "\t\t\t______________________________________  ГЛАВНОЕ МЕНЮ АДМИНИСТРАТОРА _________________________________________\n\n";
+		cout << "\t\t\t| 1. Вход в аккаунт администратора" << endl;
+		cout << "\t\t\t| 2. Выйти из главного меню" << endl;
 		int choice;
 		choice = correctNumberInput<int>();
 		switch (choice)
@@ -161,7 +168,7 @@ void adminMainMenu::displayMenu(vector<shared_ptr<AdminAccount>>& adminAccounts)
 			}
 			catch (const exception& e)
 			{
-				cerr << "Ошибка: " << e.what() << std::endl;
+				cerr << "\t\t\t| Ошибка: " << e.what() << std::endl;
 			}
 			break;
 		}
@@ -170,7 +177,7 @@ void adminMainMenu::displayMenu(vector<shared_ptr<AdminAccount>>& adminAccounts)
 			return;
 		}
 		default:
-			cout << "Не верный ввод!" << endl;
+			cout << "\t\t\t| Не верный ввод!" << endl;
 		}
 	}
 }
@@ -178,10 +185,12 @@ void userMainMenu::displayMenu(vector<shared_ptr<UserAccount>>& userAccounts) co
 {
 	while (1)
 	{
-		cout << "=================ГЛАВНОЕ МЕНЮ ПОЛЬЗОВАТЕЛЯ================" << endl;
-		cout << "1. Регистрация аккаунта пользователя" << endl;
-		cout << "2. Вход в аккаунт пользователя" << endl;
-		cout << "3. Выйти из главного меню" << endl;
+		system("cls");
+		cout << "\t\t\t_____________________________________________________________________________________________________________\n\n\n";
+		cout << "\t\t\t______________________________________  ГЛАВНОЕ МЕНЮ ПОЛЬЗОВАТЕЛЯ ___________________________________________\n\n";
+		cout << "\t\t\t| 1. Регистрация аккаунта пользователя" << endl;
+		cout << "\t\t\t| 2. Вход в аккаунт пользователя" << endl;
+		cout << "\t\t\t| 3. Выйти из главного меню" << endl;
 		int choice;
 		choice = correctNumberInput<int>();
 		switch (choice)
@@ -206,7 +215,7 @@ void userMainMenu::displayMenu(vector<shared_ptr<UserAccount>>& userAccounts) co
 			}
 			catch (const exception& e)
 			{
-				cerr << "Ошибка: " << e.what() << std::endl;
+				cerr << "\t\t\t| Ошибка: " << e.what() << std::endl;
 			}
 			break;
 		}
@@ -215,7 +224,7 @@ void userMainMenu::displayMenu(vector<shared_ptr<UserAccount>>& userAccounts) co
 			return;
 		}
 		default:
-			cout << "Не верный ввод!" << endl;
+			cout << "\t\t\t| Не верный ввод!" << endl;
 		}
 	}
 }
@@ -224,10 +233,12 @@ void statusMenu::displayMenu(vector<shared_ptr<UserAccount>>& userAccounts, vect
 {
 	while (1)
 	{
-		cout << "=================МЕНЮ ВЫБОРА СТАТУСА================" << endl;
-		cout << "1. Пользователь" << endl;
-		cout << "2. Администратор" << endl;
-		cout << "3. Выйти из меню выбора статуса" << endl;
+		system("cls");
+		cout << "\t\t\t_____________________________________________________________________________________________________________\n\n\n";
+		cout << "\t\t\t__________________________________________  МЕНЮ ВЫБОРА СТАТУСА _____________________________________________\n\n";
+		cout << "\t\t\t| 1. Пользователь" << endl;
+		cout << "\t\t\t| 2. Администратор" << endl;
+		cout << "\t\t\t| 3. Выйти из меню выбора статуса" << endl;
 		int choice;
 		choice = correctNumberInput<int>();
 		switch (choice)
@@ -249,7 +260,7 @@ void statusMenu::displayMenu(vector<shared_ptr<UserAccount>>& userAccounts, vect
 			return;
 		}
 		default:
-			cout << "Не верный ввод!" << endl;
+			cout << "\t\t\t| Не верный ввод!" << endl;
 		}
 	}
 }

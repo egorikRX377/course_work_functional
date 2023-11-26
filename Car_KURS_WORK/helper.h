@@ -48,13 +48,13 @@ T correctNumberInput()
 		{
 			cin.clear();
 			cin.ignore(32767, '\n');
-			cout << "Некоррекный ввод!" << endl;
+			cout << "\t\t\t| Некоррекный ввод!" << endl;
 			continue;
 		}
 		cin.ignore(32767, '\n');
 		if (cin.gcount() > 1)
 		{
-			cout << "Некорректный ввод!" << endl;
+			cout << "\t\t\t| Некорректный ввод!" << endl;
 			continue;
 		}
 		break;
