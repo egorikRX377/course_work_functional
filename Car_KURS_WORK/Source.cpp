@@ -26,6 +26,13 @@ int main()
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 
+	// Получаем дескриптор консоли
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+	// Устанавливаем цвет текста
+	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+
+
 	carBASE = FileHandler<Car>::readFromFile(filePATHS::carPATH);
 	adminAccounts = FileHandler<AdminAccount>::readFromFile(filePATHS::ADMIN_ACCOUNTS_PATH);
 	userAccounts = FileHandler<UserAccount>::readFromFile(filePATHS::USER_ACCOUNTS_PATH);

@@ -52,7 +52,10 @@ void userFunctionalMenu::displayMenu(Customer& customer) const
 			return;
 		}
 		default:
+		{
 			cout << "\t\t\t| Не верный ввод!" << endl;
+			system("pause");
+		}
 		}
 	}
 }
@@ -134,7 +137,10 @@ void adminFunctionalMenu::displayMenu(Employee& employee) const
 			return;
 		}
 		default:
+		{
 			cout << "\t\t\t| Не верный ввод!" << endl;
+			system("pause");
+		}
 		}
 	}
 }
@@ -178,7 +184,10 @@ void adminMainMenu::displayMenu(vector<shared_ptr<AdminAccount>>& adminAccounts)
 			return;
 		}
 		default:
+		{
 			cout << "\t\t\t| Не верный ввод!" << endl;
+			system("pause");
+		}
 		}
 	}
 }
@@ -226,7 +235,10 @@ void userMainMenu::displayMenu(vector<shared_ptr<UserAccount>>& userAccounts) co
 			return;
 		}
 		default:
+		{
 			cout << "\t\t\t| Не верный ввод!" << endl;
+			system("pause");
+		}
 		}
 	}
 }
@@ -262,7 +274,10 @@ void statusMenu::displayMenu(vector<shared_ptr<UserAccount>>& userAccounts, vect
 			return;
 		}
 		default:
+		{
 			cout << "\t\t\t| Не верный ввод!" << endl;
+			system("pause");
+		}
 		}
 	}
 }
