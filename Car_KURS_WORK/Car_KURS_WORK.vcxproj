@@ -104,10 +104,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>E:\cryptopp890;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>E:\cryptopp890\x64\Output\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>cryptlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -130,6 +134,7 @@
     <ClCompile Include="car.cpp" />
     <ClCompile Include="customer.cpp" />
     <ClCompile Include="employee.cpp" />
+    <ClCompile Include="encryption.cpp" />
     <ClCompile Include="menu.cpp" />
     <ClCompile Include="paymentMethods.cpp" />
     <ClCompile Include="reg_log_area.cpp" />
@@ -141,6 +146,7 @@
     <ClInclude Include="car.h" />
     <ClInclude Include="customer.h" />
     <ClInclude Include="employee.h" />
+    <ClInclude Include="encryption.h" />
     <ClInclude Include="fileHandler.h" />
     <ClInclude Include="helper.h" />
     <ClInclude Include="menu.h" />

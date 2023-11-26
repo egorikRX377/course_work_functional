@@ -6,6 +6,7 @@
 #include <fstream>
 #include <vector>
 #include <conio.h>
+#include "encryption.h"
 
 
 using namespace std;
@@ -82,7 +83,9 @@ public:
 		cout << "¬ведите пароль: ";
 		password = inputPassword();
 
-		accountsBASE.push_back(make_shared<T>(login, password));
+		string hashedPassword = hashPassword(password);
+
+		accountsBASE.push_back(make_shared<T>(login, hashedPassword));
 
 		cout << "—пасибо за регистрацию!" << endl;
 		system("pause");
@@ -237,6 +240,8 @@ public:
 
 		string pasTry;
 		pasTry = inputPasswordSecure();
+
+		pasTry = hashPassword(pasTry);
 
 		auto item = find_if(accountsBASE.begin(), accountsBASE.end(), [&logTry, &pasTry](shared_ptr<T>& a) { return ((a->getLogin() == logTry) && (a->getPassword() == pasTry)); });
 		if (item != accountsBASE.end())

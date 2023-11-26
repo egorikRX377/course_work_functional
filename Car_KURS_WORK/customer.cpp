@@ -45,6 +45,11 @@ void Customer::inputDataAboutYourSelf()
 
 void Customer::printAllCarInfo(const vector <shared_ptr<Car>>& carBASE, Table<Car>& table)
 {
+	if (carBASE.size() == 0)
+	{
+		cout << "Информация об автомобилях отсутствует" << endl;
+		return;
+	}
 	table.displayTable(carBASE);
 	return;
 }
@@ -318,6 +323,7 @@ void Customer::orderCar(vector <shared_ptr<Car>>& carBASE)
 			{
 				isAgree = true;
 				contractBASE.push_back(contract);
+				carBASE.erase(carBASE.begin() + i);
 				cout << "Заказ принят!" << endl;
 				break;
 			}

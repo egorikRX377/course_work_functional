@@ -50,6 +50,11 @@ void Employee::addCarInfo(vector <shared_ptr<Car>>& carBASE)
 
 void Employee::printAllCarInfo(const vector <shared_ptr<Car>>& carBASE, Table<Car>& table)
 {
+	if (carBASE.size() == 0)
+	{
+		cout << "Информация об автомобилях отсутствует" << endl;
+		return;
+	}
 	table.displayTable(carBASE);
 	return;
 }
@@ -400,6 +405,11 @@ void Employee::filtrateCarInfo(const vector <shared_ptr<Car>>& carBASE)
 void Employee::printAllSaleContracts(const vector <shared_ptr<saleContract>>& contractBASE)
 {
 	system("cls");
+	if (contractBASE.size() == 0)
+	{
+		cout << "Информация о договорах купли-продажи отсутствует!" << endl;
+		return;
+	}
 	for (const auto& item : contractBASE)
 	{
 		item->displayContractInfo();
