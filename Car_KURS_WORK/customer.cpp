@@ -14,7 +14,7 @@ Customer::Customer(shared_ptr<UserAccount> account)
 {
 	if (!account)
 	{
-		throw runtime_error("Ошибка входа в аккаунт!");
+		throw runtime_error("Неверно введён логин или пароль!");
 	}
 	this->account = account;
 }
@@ -55,7 +55,7 @@ void Customer::printAllCarInfo(const vector <shared_ptr<Car>>& carBASE, Table<Ca
 		return;
 	}
 	table.displayTable(carBASE);
-	system("pause");
+	cout << "\t\t\t| "; system("pause");
 	return;
 }
 
@@ -79,24 +79,24 @@ void Customer::sortCarInfo(vector <shared_ptr<Car>>& carBASE)
 		case 1:
 		{
 			sort(carBASE.begin(), carBASE.end(), [](const shared_ptr<Car>& a, const shared_ptr<Car>& b) { return a->getBrand() < b->getBrand(); });
-			system("pause");
+			cout << "\t\t\t| "; system("pause");
 			break;
 		}
 		case 2:
 		{
 			sort(carBASE.begin(), carBASE.end(), [](const shared_ptr<Car>& a, const shared_ptr<Car>& b) { return a->getMileAge() < b->getMileAge(); });
-			system("pause");
+			cout << "\t\t\t| "; system("pause");
 			break;
 		}
 		case 3:
 		{
 			sort(carBASE.begin(), carBASE.end(), [](const shared_ptr<Car>& a, const shared_ptr<Car>& b) { return a->getPrice() > b->getPrice(); });
-			system("pause");
+			cout << "\t\t\t| "; system("pause");
 			break;
 		}
 		case 4:
 		{
-			system("pause");
+			cout << "\t\t\t| "; system("pause");
 			return;
 		}
 		default:
@@ -125,9 +125,9 @@ void Customer::findCarInfo(const vector <shared_ptr<Car>>& carBASE)
 			cout << "\t\t\t| Введите марку автомобиля: ";
 			getline(cin >> ws, brand);
 			auto iter = find_if(carBASE.begin(), carBASE.end(), [&brand](const shared_ptr<Car>& a) { return a->getBrand() == brand; });
-			if (iter == carBASE.end()) { cout << "\t\t\t| Автомобиля, с такой маркой не было найдено!" << endl; system("pause"); break; }
+			if (iter == carBASE.end()) { cout << "\t\t\t| Автомобиля, с такой маркой не было найдено!" << endl; cout << "\t\t\t| ";  system("pause"); break; }
 			(*iter)->displayCarInfo();
-			system("pause");
+			cout << "\t\t\t| "; system("pause");
 			break;
 		}
 		case 2:
@@ -136,9 +136,9 @@ void Customer::findCarInfo(const vector <shared_ptr<Car>>& carBASE)
 			cout << "\t\t\t| Введите регистрационный номер автомобиля: ";
 			getline(cin >> ws, regNumber);
 			auto iter = find_if(carBASE.begin(), carBASE.end(), [&regNumber](const shared_ptr<Car>& a) { return a->getRegistrationNumber() == regNumber; });
-			if (iter == carBASE.end()) { cout << "\t\t\t| Автомобиля, с таким регистрационным номером не было найдено!" << endl; system("pause"); break; }
+			if (iter == carBASE.end()) { cout << "\t\t\t| Автомобиля, с таким регистрационным номером не было найдено!" << endl; cout << "\t\t\t| ";  system("pause"); break; }
 			(*iter)->displayCarInfo();
-			system("pause");
+			cout << "\t\t\t| "; system("pause");
 			break;
 		}
 		case 3:
@@ -147,9 +147,9 @@ void Customer::findCarInfo(const vector <shared_ptr<Car>>& carBASE)
 			cout << "\t\t\t| Введите цену автомобиля: ";
 			price = correctNumberInput<int>();
 			auto iter = find_if(carBASE.begin(), carBASE.end(), [&price](const shared_ptr<Car>& a) { return a->getPrice() == price; });
-			if (iter == carBASE.end()) { cout << "\t\t\t| Автомобиля, с такой ценой не было найдено!" << endl; system("pause");  break; }
+			if (iter == carBASE.end()) { cout << "\t\t\t| Автомобиля, с такой ценой не было найдено!" << endl; cout << "\t\t\t| ";  system("pause");  break; }
 			(*iter)->displayCarInfo();
-			system("pause");
+			cout << "\t\t\t| "; system("pause");
 			break;
 		}
 		case 4:
@@ -210,7 +210,7 @@ void Customer::filtrateCarInfo(const vector <shared_ptr<Car>>& carBASE)
 				}
 				brands.push_back(brand);
 			}
-			system("pause");
+			cout << "\t\t\t| "; system("pause");
 			break;
 		}
 		case 2:
@@ -220,14 +220,14 @@ void Customer::filtrateCarInfo(const vector <shared_ptr<Car>>& carBASE)
 			cin >> minPrice;
 			cout << "\t\t\t| Максимальная цена: ";
 			cin >> maxPrice;
-			system("pause");
+			cout << "\t\t\t| "; system("pause");
 			break;
 		}
 		case 3:
 		{
 			cout << "\t\t\t| Введите максимальный пробег необходимых автомобилей: ";
 			cin >> maxMileAge;
-			system("pause");
+			cout << "\t\t\t| "; system("pause");
 			break;
 		}
 		case 4:
@@ -261,7 +261,7 @@ void Customer::filtrateCarInfo(const vector <shared_ptr<Car>>& carBASE)
 		}
 	}
 	if (!isExist) { cout << "\t\t\t| Не было найдено автомобилей по заданным параметрам" << endl; }
-	system("pause");
+	cout << "\t\t\t| "; system("pause");
 	return;
 }
 
@@ -345,11 +345,11 @@ void Customer::orderCar(vector <shared_ptr<Car>>& carBASE)
 	if (!isExist)
 	{
 		cout << "\t\t\t| Машина с таким id не найдена" << endl;
-		system("pause");
+		cout << "\t\t\t| "; system("pause");
 	}
 	else if (!isAgree)
 	{
 		cout << "\t\t\t| Заказ отменён!" << endl;
-		system("pause");
+		cout << "\t\t\t| "; system("pause");
 	}
 }

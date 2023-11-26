@@ -169,6 +169,7 @@ void adminMainMenu::displayMenu(vector<shared_ptr<AdminAccount>>& adminAccounts)
 			catch (const exception& e)
 			{
 				cerr << "\t\t\t| Îøèáêà: " << e.what() << std::endl;
+				cout << "\t\t\t| "; system("pause");
 			}
 			break;
 		}
@@ -216,6 +217,7 @@ void userMainMenu::displayMenu(vector<shared_ptr<UserAccount>>& userAccounts) co
 			catch (const exception& e)
 			{
 				cerr << "\t\t\t| Îøèáêà: " << e.what() << std::endl;
+				cout << "\t\t\t| "; system("pause");
 			}
 			break;
 		}

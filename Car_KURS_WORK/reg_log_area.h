@@ -72,6 +72,8 @@ class RegistrateSystem : public IRegistrable<T>
 public:
 	void registrate(vector<shared_ptr<T>>& accountsBASE) override
 	{
+		system("cls");
+
 		cout << "\t\t\t_________________________________________________________________________________________________\n\n\n";
 		cout << "\t\t\t__________________________________  ÐÅÃÈÑÒÐÀÖÈß ÀÊÊÀÓÍÒÀ ________________________________________\n\n";
 
@@ -86,7 +88,7 @@ public:
 		accountsBASE.push_back(make_shared<T>(login, hashedPassword));
 
 		cout << "\t\t\t| Ñïàñèáî çà ðåãèñòðàöèþ!" << endl;
-		system("pause");
+		cout << "\t\t\t| "; system("pause");
 	}
 
 	string inputCorrectLogin(vector<shared_ptr<T>>& accountsBASE)
@@ -245,7 +247,7 @@ public:
 		if (item != accountsBASE.end())
 		{
 			cout << "\t\t\t| Âû óñïåøíî âîøëè â àêêàóíò!" << endl;
-			system("pause");
+			cout << "\t\t\t| "; system("pause");
 			return *item;
 		}
 		else
