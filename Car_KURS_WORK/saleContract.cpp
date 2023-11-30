@@ -41,8 +41,8 @@ shared_ptr<PaymentMethod>& saleContract::getMethod() { return method; }
 
 ostream& operator<<(ostream& buf, const shared_ptr<saleContract>& contractPtr)
 {
-	buf << contractPtr->getID() << ' ' << contractPtr->customer.getName() << ' ' << contractPtr->customer.getAddress() << ' ' << contractPtr->car.getBrand()
-		<< ' ' << contractPtr->car.getRegistrationNumber() << ' ' << contractPtr->method->getMethodName() << ' ' << contractPtr->method->getCost() << ' ' << contractPtr->method->getFee() << ' '
+	buf << contractPtr->getID() << ' ' << contractPtr->customer.getName() << ',' << contractPtr->customer.getAddress() << '~' << contractPtr->car.getBrand()
+		<< ',' << contractPtr->car.getRegistrationNumber() << ',' << contractPtr->method->getMethodName() << ',' << contractPtr->method->getCost() << ' ' << contractPtr->method->getFee() << ' '
 		<< contractPtr->method->getPeriod() << ' ' << contractPtr->method->getPercent() << ' ' << contractPtr->method->getMonthlyFee() << ' ' << contractPtr->method->getResultCost() << endl;
 	return buf;
 }
@@ -62,7 +62,14 @@ istream& operator>>(istream& buf, shared_ptr<saleContract>& contractPtr)
 	double monthlyFee;
 	double resultCost;
 
-	buf >> id >> name >> address >> brand >> regNumber >> methodName >> cost >> fee >> period >> percent >> monthlyFee >> resultCost;
+	buf >> id;
+	getline(buf >> ws, name, ',');
+	getline(buf >> ws, address, '~');
+	getline(buf >> ws, brand, ',');
+	getline(buf >> ws, regNumber, ',');
+	getline(buf >> ws, methodName, ',');
+	buf >> cost >> fee >> period >> percent >> monthlyFee >> resultCost;
+
 	contractPtr->saleContractID = id;
 	contractPtr->customer.setName(name);
 	contractPtr->customer.setAddress(address);

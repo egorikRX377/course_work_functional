@@ -15,3 +15,11 @@ void CarTable::displayTable(const vector<shared_ptr<Car>>& carBASE) const
 		cout << '|' << setw(5) << right << setfill('=') << "" << setw(20) << left << setfill('=') << "" << setw(25) << left << setfill('=') << "" << setw(10) << left << "" << setw(10) << left << "" << setw(25) << left << "" << '|' << endl;
 	}
 }
+
+
+void displayCarTableHeader()
+{
+	cout << "\t\t\t" << setw(5) << right << setfill('=') << "" << setw(20) << left << setfill('=') << "" << setw(25) << left << setfill('=') << "" << setw(10) << left << "" << setw(10) << left << "" << setw(27) << left << "" << endl;
+	cout << "\t\t\t" << '|' << setw(5) << left << setfill(' ') << "ID" << '|' << setw(20) << left << setfill(' ') << "Марка" << '|' << setw(25) << left << "Регистрационный номер" << '|' << setw(10) << left << "Пробег" << '|' << setw(10) << left << "Цена" << '|' << setw(20) << left << "Состояние" << '|' << endl;
+	cout << "\t\t\t" << '|' << setw(5) << right << setfill('=') << "" << setw(20) << left << setfill('=') << "" << setw(25) << left << setfill('=') << "" << setw(10) << left << "" << setw(10) << left << "" << setw(25) << left << "" << '|' << endl;
+}

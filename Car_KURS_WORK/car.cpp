@@ -54,12 +54,16 @@ void Car::spcDisplayCarInfo() const
 
 ostream& operator<<(ostream& buf, const shared_ptr<Car>& carPtr)
 {
-	buf << carPtr->getID() << ' ' << carPtr->getBrand() << ' ' << carPtr->getRegistrationNumber() << ' ' << carPtr->getMileAge() << ' ' << carPtr->getPrice() << ' ' << carPtr->getCondition() << endl;
+	buf << carPtr->getID() << ' ' << carPtr->getBrand() << ',' << carPtr->getRegistrationNumber() << ',' << carPtr->getMileAge() << ' ' << carPtr->getPrice() << ' ' << carPtr->getCondition() << ',' << endl;
 	return buf;
 }
 istream& operator>>(istream& buf, shared_ptr<Car>& carPtr)
 {
-	buf >> carPtr->carID >> carPtr->brand >> carPtr->registrationNumber >> carPtr->mileAge >> carPtr->price >> carPtr->condition;
+	buf >> carPtr->carID;
+	getline(buf >> ws, carPtr->brand, ',');
+	getline(buf >> ws, carPtr->registrationNumber, ','); 
+	buf >> carPtr->mileAge >> carPtr->price;
+	getline(buf >> ws, carPtr->condition, ',');
 	return buf;
 }
 

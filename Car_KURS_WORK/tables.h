@@ -25,3 +25,6 @@ class CarTable : public Table<Car>
 public:
 	void displayTable(const vector<shared_ptr<Car>>& carBASE) const override;
 };
+
+
+void displayCarTableHeader();
