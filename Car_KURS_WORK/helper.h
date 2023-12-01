@@ -36,28 +36,37 @@ int generateUniqueID(vector<shared_ptr<T>>& anyBASE)
 		}
 	}
 }
-
 template<class T>
 T correctNumberInput()
 {
-	T number = 0;
-	while (true)
-	{
-		cin >> number;
-		if (cin.fail())
-		{
-			cin.clear();
-			cin.ignore(32767, '\n');
-			cout << "\t\t\t| Некоррекный ввод!" << endl;
-			continue;
-		}
-		cin.ignore(32767, '\n');
-		if (cin.gcount() > 1)
-		{
-			cout << "\t\t\t| Некорректный ввод!" << endl;
-			continue;
-		}
-		break;
-	}
-	return number;
+    T number = 0;
+    while (true)
+    {
+        try
+        {
+            cin >> number;
+            if (cin.fail())
+            {
+                cin.clear();
+                cin.ignore(32767, '\n');
+                throw runtime_error("Некорректный ввод!");
+            }
+
+            if (number < 0)
+            {
+                throw 1;
+            }
+
+            break;
+        }
+        catch (const runtime_error& e)
+        {
+            cerr << "\t\t\t| Ошибка: " << e.what() << endl;
+        }
+        catch (int)
+        {
+            cerr << "\t\t\t| Ошибка: Отрицательный ввод!" << endl;
+        }
+    }
+    return number;
 }

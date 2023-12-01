@@ -241,7 +241,7 @@ void Employee::findCarInfo(const vector <shared_ptr<Car>>& carBASE)
 	while (1)
 	{
 		cout << "\t\t\t_________________________________________________________________________________________________\n\n\n";
-		cout << "\t\t\t________________________  НАЙТИ ИНФОРМАЦИЮ О МАШИНАХ ПО ПАРАМЕТРУ_________________________\n\n";
+		cout << "\t\t\t________________________  НАЙТИ ИНФОРМАЦИЮ О МАШИНАХ ПО ПАРАМЕТРУ________________________________\n\n";
 		cout << "\t\t\t| 1. Найти машину по марке" << endl;
 		cout << "\t\t\t| 2. Найти машину по регистрационному номеру" << endl;
 		cout << "\t\t\t| 3. Найти машину по цене" << endl;
@@ -308,11 +308,16 @@ void Employee::filtrateCarInfo(const vector <shared_ptr<Car>>& carBASE)
 	system("cls");
 
 	vector<string> brands;
+
+
 	double minPrice = 0;
 	double maxPrice = 1000000;
 	double maxMileAge = 5000000;
 
 	bool isExist = false;
+
+	bool isFirstCondition = false;
+
 	while (1)
 	{
 		cout << "\t\t\t_________________________________________________________________________________________________\n\n\n";
@@ -328,6 +333,7 @@ void Employee::filtrateCarInfo(const vector <shared_ptr<Car>>& carBASE)
 		{
 		case 1:
 		{
+			isFirstCondition = true;
 			string input;
 			cout << "\t\t\t| Введите марки необходимых автомобилей (марки разделяйте символом ':') : ";
 			getline(cin >> ws, input);
@@ -358,16 +364,16 @@ void Employee::filtrateCarInfo(const vector <shared_ptr<Car>>& carBASE)
 		{
 			cout << "\t\t\t| //Введите диапазон цен//" << endl;
 			cout << "\t\t\t| Минимальная цена: ";
-			cin >> minPrice;
+			minPrice = correctNumberInput<double>();
 			cout << "\t\t\t| Максимальная цена: ";
-			cin >> maxPrice;
+			maxPrice = correctNumberInput<double>();
 			cout << "\t\t\t| "; system("pause");
 			break;
 		}
 		case 3:
 		{
 			cout << "\t\t\t| Введите максимальный пробег необходимых автомобилей: ";
-			cin >> maxMileAge;
+			maxMileAge = correctNumberInput<double>();
 			cout << "\t\t\t| "; system("pause");
 			break;
 		}
@@ -387,23 +393,43 @@ void Employee::filtrateCarInfo(const vector <shared_ptr<Car>>& carBASE)
 	int i = 0;
 	for (const auto& car : carBASE)
 	{
-		for (const auto& carBrand : brands)
+		if (isFirstCondition)
 		{
-			if (car->getBrand() == carBrand)
+			for (const auto& carBrand : brands)
 			{
-				if (car->getPrice() >= minPrice && car->getPrice() <= maxPrice)
+				if (car->getBrand() == carBrand)
 				{
-					if (car->getMileAge() <= maxMileAge)
+					if (car->getPrice() >= minPrice && car->getPrice() <= maxPrice)
 					{
-						i++;
-						if (i == 1)
+						if (car->getMileAge() <= maxMileAge)
 						{
-							displayCarTableHeader();
-						}
-						isExist = true;	
+							i++;
+							if (i == 1)
+							{
+								displayCarTableHeader();
+							}
+							isExist = true;
 
-						car->displayCarInfo();
+							car->displayCarInfo();
+						}
 					}
+				}
+			}
+		}
+		else
+		{
+			if (car->getPrice() >= minPrice && car->getPrice() <= maxPrice)
+			{
+				if (car->getMileAge() <= maxMileAge)
+				{
+					i++;
+					if (i == 1)
+					{
+						displayCarTableHeader();
+					}
+					isExist = true;
+
+					car->displayCarInfo();
 				}
 			}
 		}
@@ -437,7 +463,7 @@ void Employee::findSaleContracts(const vector <shared_ptr<saleContract>>& contra
 	while (1)
 	{
 		cout << "\t\t\t_________________________________________________________________________________________________\n\n\n";
-		cout << "\t\t\t________________________  НАЙТИ ИНФОРМАЦИЮ О ДОГОВОРАХ ПО ПАРАМЕТРУ_________________________\n\n";
+		cout << "\t\t\t___________________________  НАЙТИ ИНФОРМАЦИЮ О ДОГОВОРАХ ПО ПАРАМЕТРУ___________________________\n\n";
 		cout << "\t\t\t| 1. Найти договора по имени заказчика" << endl;
 		cout << "\t\t\t| 2. Найти договора по адресу заказчика" << endl;
 		cout << "\t\t\t| 3. Найти договора по способу оплаты" << endl;
@@ -505,7 +531,7 @@ void Employee::sortSaleContracts(vector <shared_ptr<saleContract>>& contractBASE
 	while (1)
 	{
 		cout << "\t\t\t_________________________________________________________________________________________________\n\n\n";
-		cout << "\t\t\t________________________  ОТСОРТИРОВАТЬ ДОГОВОРА ПО ПАРАМЕТРУ_________________________\n\n";
+		cout << "\t\t\t_____________________________  ОТСОРТИРОВАТЬ ДОГОВОРА ПО ПАРАМЕТРУ_______________________________\n\n";
 		cout << "\t\t\t| 1. Отсортировать договора ежемесячному платежу (в порядке возрастания)" << endl;
 		cout << "\t\t\t| 2. Отсортировать договора по конечной стоимости (в порядке убывания)" << endl;
 		cout << "\t\t\t| 3. Отсортировать машины по начальному/конечному взносу (в порядке возрастания)" << endl;

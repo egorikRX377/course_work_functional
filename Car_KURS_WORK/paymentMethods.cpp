@@ -1,4 +1,5 @@
 #include "paymentMethods.h"
+#include "helper.h"
 
 
 using namespace std;
@@ -27,10 +28,10 @@ double PaymentMethod::calcResultCost(double monthlyFee)
 }
 void PaymentMethod::inputPeriod()
 {
-	while (1)
-	{
 		int somePeriod;
 		bool correctInput = false;
+		while (1)
+		{
 		somePeriod = correctNumberInput<int>();
 		switch (somePeriod)
 		{
@@ -53,13 +54,13 @@ void PaymentMethod::inputPeriod()
 			break;
 		}
 		default:
-			cout << "\t\t\t| Не верный ввод!" << endl;
+			cout << "\t\t\t| Не верный выбор!" << endl;
 		}
 		if (correctInput)
 		{
 			break;
 		}
-	}
+		}
 }
 
 string PaymentMethod::getMethodName() { return methodName; }
@@ -84,8 +85,31 @@ InstallmentPayment::InstallmentPayment(double cost)
 {
 	this->methodName = "Рассрочка";
 	this->cost = cost;
-	cout << "\t\t\t| Введите первоначальный взнос: ";
-	cin >> fee;
+	while (1)
+	{
+		bool isCorrect = false;
+		try
+		{
+			cout << "\t\t\t| Введите первоначальный взнос: ";
+			fee = correctNumberInput<double>();
+			if (fee > cost)
+			{
+				throw 1;
+			}
+			else
+			{
+				isCorrect = true;
+			}
+		}
+		catch (int)
+		{
+			cerr << "\t\t\t| Первоначальный взнос не может превышать полную стоимость автомобиля!" << endl;
+		}
+		if (isCorrect)
+		{
+			break;
+		}
+	}
 	this->percent = 10;
 	cout << "\t\t\t| Введите срок выплат: 12/36/60 :  ";
 	inputPeriod();

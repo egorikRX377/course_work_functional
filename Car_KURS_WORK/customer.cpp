@@ -110,7 +110,7 @@ void Customer::findCarInfo(const vector <shared_ptr<Car>>& carBASE)
 	while (1)
 	{
 		cout << "\t\t\t_________________________________________________________________________________________________\n\n\n";
-		cout << "\t\t\t________________________  НАЙТИ ИНФОРМАЦИЮ О МАШИНАХ ПО ПАРАМЕТРУ_________________________\n\n";
+		cout << "\t\t\t________________________  НАЙТИ ИНФОРМАЦИЮ О МАШИНАХ ПО ПАРАМЕТРУ________________________________\n\n";
 		cout << "\t\t\t| 1. Найти машину по марке" << endl;
 		cout << "\t\t\t| 2. Найти машину по регистрационному номеру" << endl;
 		cout << "\t\t\t| 3. Найти машину по цене" << endl;
@@ -176,11 +176,16 @@ void Customer::filtrateCarInfo(const vector <shared_ptr<Car>>& carBASE)
 	system("cls");
 
 	vector<string> brands;
+
+
 	double minPrice = 0;
 	double maxPrice = 1000000;
 	double maxMileAge = 5000000;
 
 	bool isExist = false;
+
+	bool isFirstCondition = false;
+
 	while (1)
 	{
 		cout << "\t\t\t_________________________________________________________________________________________________\n\n\n";
@@ -190,13 +195,13 @@ void Customer::filtrateCarInfo(const vector <shared_ptr<Car>>& carBASE)
 		cout << "\t\t\t| 3. Задать максимальный пробег" << endl;
 		cout << "\t\t\t| 4. Выйти из меню задания параметров фильтрации" << endl;
 		int choice;
-
 		choice = correctNumberInput<int>();
 
 		switch (choice)
 		{
 		case 1:
 		{
+			isFirstCondition = true;
 			string input;
 			cout << "\t\t\t| Введите марки необходимых автомобилей (марки разделяйте символом ':') : ";
 			getline(cin >> ws, input);
@@ -227,16 +232,16 @@ void Customer::filtrateCarInfo(const vector <shared_ptr<Car>>& carBASE)
 		{
 			cout << "\t\t\t| //Введите диапазон цен//" << endl;
 			cout << "\t\t\t| Минимальная цена: ";
-			cin >> minPrice;
+			minPrice = correctNumberInput<double>();
 			cout << "\t\t\t| Максимальная цена: ";
-			cin >> maxPrice;
+			maxPrice = correctNumberInput<double>();
 			cout << "\t\t\t| "; system("pause");
 			break;
 		}
 		case 3:
 		{
 			cout << "\t\t\t| Введите максимальный пробег необходимых автомобилей: ";
-			cin >> maxMileAge;
+			maxMileAge = correctNumberInput<double>();
 			cout << "\t\t\t| "; system("pause");
 			break;
 		}
@@ -256,23 +261,43 @@ void Customer::filtrateCarInfo(const vector <shared_ptr<Car>>& carBASE)
 	int i = 0;
 	for (const auto& car : carBASE)
 	{
-		for (const auto& carBrand : brands)
+		if (isFirstCondition)
 		{
-			if (car->getBrand() == carBrand)
+			for (const auto& carBrand : brands)
 			{
-				if (car->getPrice() >= minPrice && car->getPrice() <= maxPrice)
+				if (car->getBrand() == carBrand)
 				{
-					if (car->getMileAge() <= maxMileAge)
+					if (car->getPrice() >= minPrice && car->getPrice() <= maxPrice)
 					{
-						i++;
-						if (i == 1)
+						if (car->getMileAge() <= maxMileAge)
 						{
-							displayCarTableHeader();
-						}
-						isExist = true;
+							i++;
+							if (i == 1)
+							{
+								displayCarTableHeader();
+							}
+							isExist = true;
 
-						car->displayCarInfo();
+							car->displayCarInfo();
+						}
 					}
+				}
+			}
+		}
+		else
+		{
+			if (car->getPrice() >= minPrice && car->getPrice() <= maxPrice)
+			{
+				if (car->getMileAge() <= maxMileAge)
+				{
+					i++;
+					if (i == 1)
+					{
+						displayCarTableHeader();
+					}
+					isExist = true;
+
+					car->displayCarInfo();
 				}
 			}
 		}
@@ -288,7 +313,7 @@ void Customer::orderCar(vector <shared_ptr<Car>>& carBASE)
 	system("cls");
 
 	cout << "\t\t\t______________________________________________________________________________\n\n\n";
-	cout << "\t\t\t________________________ ЗАКАЗАТЬ АВТОМОБИЛЬ ________________________\n\n";
+	cout << "\t\t\t___________________________ ЗАКАЗАТЬ АВТОМОБИЛЬ ______________________________\n\n";
 
 	int id;
 	cout << "\t\t\t| Введите id машины в базе: ";
@@ -314,22 +339,32 @@ void Customer::orderCar(vector <shared_ptr<Car>>& carBASE)
 			cout << "\t\t\t| 2. Лизинг" << endl;
 			int paymentChoice;
 
-			paymentChoice = correctNumberInput<int>();
+			while (1)
+			{
+				paymentChoice = correctNumberInput<int>();
+				bool isTrue = false;
 
-			switch (paymentChoice)
-			{
-			case 1:
-			{
-				method = make_shared<InstallmentPayment>(carBASE.at(i)->getPrice());
-				break;
-			}
-			case 2:
-			{
-				method = make_shared<Leasing>(carBASE.at(i)->getPrice());
-				break;
-			}
-			default:
-				cout << "\t\t\t| Не верный выбор!" << endl;
+				switch (paymentChoice)
+				{
+				case 1:
+				{
+					method = make_shared<InstallmentPayment>(carBASE.at(i)->getPrice());
+					isTrue = true;
+					break;
+				}
+				case 2:
+				{
+					method = make_shared<Leasing>(carBASE.at(i)->getPrice());
+					isTrue = true;
+					break;
+				}
+				default:
+					cout << "\t\t\t| Не верный выбор!" << endl;
+				}
+				if (isTrue)
+				{
+					break;
+				}
 			}
 
 			shared_ptr<saleContract> contract = make_shared<saleContract>(*this, *carBASE.at(i), method);
@@ -338,25 +373,35 @@ void Customer::orderCar(vector <shared_ptr<Car>>& carBASE)
 			cout << "\t\t\t| 1. Да" << endl;
 			cout << "\t\t\t| 2. Нет (Отменить заказ)" << endl;
 			int choice;
-			choice = correctNumberInput<int>();
-			switch (choice)
+
+			while (1)
 			{
-			case 1:
-			{
-				isAgree = true;
-				contractBASE.push_back(contract);
-				carBASE.erase(carBASE.begin() + i);
-				cout << "\t\t\t| Заказ принят!" << endl;
-				cout << "\t\t\t| "; system("pause");
-				break;
-			}
-			case 2:
-			{
-				cout << "\t\t\t| "; system("pause");
-				break;
-			}
-			default:
-				cout << "\t\t\t| Не верный ввод!" << endl;
+				bool isTrue = false;
+				choice = correctNumberInput<int>();
+				switch (choice)
+				{
+				case 1:
+				{
+					isAgree = true;
+					contractBASE.push_back(contract);
+					carBASE.erase(carBASE.begin() + i);
+					cout << "\t\t\t| Заказ принят!" << endl;
+					cout << "\t\t\t| "; system("pause");
+					isTrue = true;
+					break;
+				}
+				case 2:
+				{
+					isTrue = true;
+					break;
+				}
+				default:
+					cout << "\t\t\t| Не верный ввод!" << endl;
+				}
+				if (isTrue)
+				{
+					break;
+				}
 			}
 			break;
 		}
