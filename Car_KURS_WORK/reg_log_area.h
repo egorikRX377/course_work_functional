@@ -36,13 +36,22 @@ public:
 	string getPassword();
 	void setLogin(string login);
 	void setPassword(string password);
+
+	virtual void virtualFunc() = 0;
 };
 
 class UserAccount : public Account
 {
+private:
+	bool access = true;
 public:
 	UserAccount();
 	UserAccount(string login, string password);
+
+	bool getAccess();
+	void setAccess(bool access);
+
+	void virtualFunc() override;
 
 	friend ostream& operator<<(ostream& buf, const shared_ptr<UserAccount>& accountPtr);
 	friend istream& operator>>(istream& buf, shared_ptr<UserAccount>& accountPtr);
@@ -52,7 +61,8 @@ class AdminAccount : public Account
 public:
 	AdminAccount();
 	AdminAccount(string login, string password);
-
+	bool getAccess();
+	void virtualFunc() override;
 	friend ostream& operator<<(ostream& buf, const shared_ptr<AdminAccount>& accountPtr);
 	friend istream& operator>>(istream& buf, shared_ptr<AdminAccount>& accountPtr);
 };
@@ -246,6 +256,14 @@ public:
 		auto item = find_if(accountsBASE.begin(), accountsBASE.end(), [&logTry, &pasTry](shared_ptr<T>& a) { return ((a->getLogin() == logTry) && (a->getPassword() == pasTry)); });
 		if (item != accountsBASE.end())
 		{
+			if (dynamic_pointer_cast<UserAccount>((*item)) != nullptr)
+			{
+				if ((*item)->getAccess() == false)
+				{
+					cout << "\t\t\t| Аккаут был заблокирован системным администратором!" << endl;
+					return nullptr;
+				}
+			}
 			cout << "\t\t\t| Вы успешно вошли в аккаунт!" << endl;
 			cout << "\t\t\t| "; system("pause");
 			return *item;

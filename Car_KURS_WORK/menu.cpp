@@ -75,8 +75,11 @@ void adminFunctionalMenu::displayMenu(Employee& employee) const
 		cout << "\t\t\t| 7. Фильтровать информацию об автомобилях (по параметрам)" << endl << endl;
 		cout << "\t\t\t| 8. Посмотреть информацию о договорах купли-продажи" << endl;
 		cout << "\t\t\t| 9. Найти договора по параметрам" << endl;
-		cout << "\t\t\t| 10. Отсортировать договора по параметрам" << endl;
-		cout << "\t\t\t| 11. Выйти из функционального меню пользователя" << endl;
+		cout << "\t\t\t| 10. Отсортировать договора по параметрам" << endl << endl;
+		cout << "\t\t\t| 11. Посмотреть все пользовательские аккаунты" << endl;
+		cout << "\t\t\t| 12. Заблокирвоать аккаунт пользователя" << endl;
+		cout << "\t\t\t| 13. Разблокировать аккаунт пользователя" << endl << endl;
+		cout << "\t\t\t| 14. Выйти из функционального меню пользователя" << endl;
 		int choice;
 		choice = correctNumberInput<int>();
 		switch (choice)
@@ -133,6 +136,21 @@ void adminFunctionalMenu::displayMenu(Employee& employee) const
 			break;
 		}
 		case 11:
+		{
+			employee.printAllUserAccounts(userAccounts);
+			break;
+		}
+		case 12:
+		{
+			employee.blockUserAccount(userAccounts);
+			break;
+		}
+		case 13:
+		{
+			employee.unblockUserAccount(userAccounts);
+			break;
+		}
+		case 14:
 		{
 			return;
 		}

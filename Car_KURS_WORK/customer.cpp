@@ -14,7 +14,7 @@ Customer::Customer(shared_ptr<UserAccount> account)
 {
 	if (!account)
 	{
-		throw runtime_error("Неверно введён логин или пароль!");
+		throw runtime_error("Ошибка входа!");
 	}
 	this->account = account;
 }

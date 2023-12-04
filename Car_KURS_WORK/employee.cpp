@@ -566,3 +566,123 @@ void Employee::sortSaleContracts(vector <shared_ptr<saleContract>>& contractBASE
 	}
 }
 
+void Employee::printAllUserAccounts(const vector <shared_ptr<UserAccount>>& accountBASE)
+{
+	system("cls");
+
+	cout << "\t\t\t__________________________________________________________________________________________________________________________________\n\n\n";
+	cout << "\t\t\t_______________________________________  ВЫВОД ВСЕХ ЗАРЕГИСТРИРОВАННЫХ ПОЛЬЗОВАТЬСКИХ АККАУНТОВ __________________________________\n\n";
+	if (accountBASE.size() == 0)
+	{
+		cout << "\t\t\t| Пользовательские аккаунты отсутствуют" << endl;
+		cout << "\t\t\t| "; system("pause");
+		return;
+	}
+	cout << "\t\t\t" << setw(20) << right << setfill('=') << "" << setw(16) << setfill('=') << "" << endl;
+	cout << "\t\t\t" << '|' << setw(20) << left << setfill(' ') << "Логин" << '|' << setw(13) << left << setfill(' ') << "Доступ" << '|' << endl;
+	cout << "\t\t\t" << setw(20) << right << setfill('=') << "" << setw(16) << setfill('=') << "" << endl;
+
+	for (const auto& item : accountBASE)
+	{
+		cout << "\t\t\t" << '|' << setw(20) << left << setfill(' ') << item->getLogin() << '|' << setw(13) << left << setfill(' ');
+		if (item->getAccess() == 1)
+		{
+			cout << "Активен" << '|' << endl;
+		}
+		else
+		{
+			cout << "Заблокирован" << '|' << endl;
+		}
+		cout << "\t\t\t" << setw(20) << right << setfill('=') << "" << setw(16) << setfill('=') << "" << endl;
+	}
+
+	cout << "\t\t\t| "; system("pause");
+	return;
+}
+void Employee::blockUserAccount(vector <shared_ptr<UserAccount>>& accountBASE)
+{
+	system("cls");
+
+	cout << "\t\t\t_________________________________________________________________________________________________\n\n\n";
+	cout << "\t\t\t__________________________________  ЗАБЛОКИРОВАТЬ ПОЛЬЗОВАТЕЛЯ __________________________________\n\n";
+	if (accountBASE.size() == 0)
+	{
+		cout << "\t\t\t| Пользовательские аккаунты отсутствует!" << endl;
+		cout << "\t\t\t| "; system("pause");
+		return;
+	}
+
+	string login;
+	cout << "\t\t\t| Введите логин пользователя, которого надо заблокировать: ";
+	getline(cin >> ws, login);
+
+	bool isExist = false;
+	for (auto& item : accountBASE)
+	{
+		if (item->getLogin() == login)
+		{
+			isExist = true;
+			if (item->getAccess() == false)
+			{
+				cout << "\t\t\t| Аккаунт уже заблокирован!" << endl;
+				cout << "\t\t\t| "; system("pause");
+				return;
+			}
+			item->setAccess(false);
+			cout << "\t\t\t| Аккаунт успешно заблокирован!" << endl;
+			cout << "\t\t\t| "; system("pause");
+			return;
+		}
+	}
+
+	if (!isExist)
+	{
+		cout << "\t\t\t| Данного пользовательского аккаунта не существует!" << endl;
+		cout << "\t\t\t| "; system("pause");
+	}
+	return;
+}
+void Employee::unblockUserAccount(vector <shared_ptr<UserAccount>>& accountBASE)
+{
+	system("cls");
+
+	cout << "\t\t\t_________________________________________________________________________________________________\n\n\n";
+	cout << "\t\t\t__________________________________  РАЗБЛОКИРОВАТЬ АККАУНТ __________________________________\n\n";
+	if (accountBASE.size() == 0)
+	{
+		cout << "\t\t\t| Пользовательские аккаунты отсутствует!" << endl;
+		cout << "\t\t\t| "; system("pause");
+		return;
+	}
+
+	string login;
+	cout << "\t\t\t| Введите логин пользователя, которого надо разблокировать: ";
+	getline(cin >> ws, login);
+
+	bool isExist = false;
+	for (auto& item : accountBASE)
+	{
+		if (item->getLogin() == login)
+		{
+			isExist = true;
+			if (item->getAccess() == true)
+			{
+				cout << "\t\t\t| Аккаунт уже активен!" << endl;
+				cout << "\t\t\t| "; system("pause");
+				return;
+			}
+			item->setAccess(true);
+			cout << "\t\t\t| Аккаунт успешно разблокирован!" << endl;
+			cout << "\t\t\t| "; system("pause");
+			return;
+		}
+	}
+
+	if (!isExist)
+	{
+		cout << "\t\t\t| Данного пользовательского аккаунта не существует!" << endl;
+		cout << "\t\t\t| "; system("pause");
+	}
+	return;
+}
+
