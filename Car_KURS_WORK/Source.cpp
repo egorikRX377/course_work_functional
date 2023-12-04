@@ -26,10 +26,7 @@ int main()
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 
-	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-
-	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_INTENSITY);
-
+	system("color F0");
 
 	carBASE = FileHandler<Car>::readFromFile(filePATHS::carPATH);
 	adminAccounts = FileHandler<AdminAccount>::readFromFile(filePATHS::ADMIN_ACCOUNTS_PATH);
