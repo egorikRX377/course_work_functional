@@ -26,6 +26,18 @@ int main()
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 
+	SetConsoleTitle(L"Система учёта продаж автомобилей в автосалоне");
+	
+	HWND console = GetConsoleWindow();
+	RECT r;
+	GetWindowRect(console, &r); 
+
+	MoveWindow(console, r.left, r.top, 1200, 600, TRUE); 
+
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	COORD newSize = { 1200, 800 };
+	SetConsoleScreenBufferSize(hConsole, newSize);
+
 	system("color F0");
 
 	carBASE = FileHandler<Car>::readFromFile(filePATHS::carPATH);
